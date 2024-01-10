@@ -65,7 +65,7 @@ public class TSScConnection : MonoBehaviour
     // This Function is called when the program begins
     void Start()
     {
-
+        
     }
 
     // This Function is called each render frame

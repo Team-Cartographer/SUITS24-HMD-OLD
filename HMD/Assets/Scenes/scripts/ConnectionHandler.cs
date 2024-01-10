@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class Compass : MonoBehaviour
+public class ConnectionHandler : MonoBehaviour
 {
-
     // Start is called before the first frame update
-    public ConnectionHandler connectionHandler;
+    public TSScConnection TSSc;
     void Start()
     {
-        Debug.Log(connectionHandler.GetConnection());
+        TSSc.ConnectToHost("172.24.196.222", 2, 14141);
+    }
+
+    public TSScConnection GetConnection()
+    {
+        return this.TSSc;
     }
 
     // Update is called once per frame
