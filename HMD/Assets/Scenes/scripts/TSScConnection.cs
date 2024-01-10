@@ -44,6 +44,18 @@ public class TSScConnection : MonoBehaviour
         // Test Connection
         StartCoroutine(GetRequest(this.url));
     }
+    // Connect with port
+    public void ConnectToHost(string host, int team_number, int port)
+    {
+        this.host = host;
+        this.port = port.ToString();
+        this.team_number = team_number;
+        this.url = "http://" + this.host + ":" + this.port;
+        Debug.Log(this.url);
+
+        // Test Connection
+        StartCoroutine(GetRequest(this.url));
+    }
 
     public void DisconnectFromHost()
     {
@@ -53,7 +65,7 @@ public class TSScConnection : MonoBehaviour
     // This Function is called when the program begins
     void Start()
     {
-        this.connected = false;
+
     }
 
     // This Function is called each render frame
