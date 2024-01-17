@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviour
     
     private void LateUpdate()
     {
+        Vector3 playerPosition = Camera.main.transform.position;
+
         if (Input.GetKeyDown(KeyCode.P)) 
         {
-            allPins.Add(Instantiate(worldPin, 
-                new Vector3(transform.position.x, transform.position.y, transform.position.z), 
-                Quaternion.identity));
+            GameObject newPin = Instantiate(worldPin,
+                new Vector3(playerPosition.x, playerPosition.y, playerPosition.z),
+                Quaternion.identity);
+            allPins.Add(newPin);
         }
     }
 }
