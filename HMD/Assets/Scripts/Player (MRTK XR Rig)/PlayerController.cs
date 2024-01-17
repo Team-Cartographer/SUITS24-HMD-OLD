@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         
     }
-
+    
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.P)) 
