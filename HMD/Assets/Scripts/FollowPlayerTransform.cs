@@ -25,14 +25,6 @@ public class FollowPlayerTransform : MonoBehaviour
     int yIgnore;
     int zIgnore;
 
-    /*[Header("Rotation")]
-    [SerializeField] bool rotateX = false;
-    [SerializeField] bool rotateY = false;
-    [SerializeField] bool rotateZ = false;
-    int xRotate;
-    int yRotate;
-    int zRotate;*/
-
     // Start is called before the first frame update
     void Start()
     {

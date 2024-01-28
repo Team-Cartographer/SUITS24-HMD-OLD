@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject worldPin;
     [SerializeField] List<GameObject> allPins;
 
+    Vector3 playerPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +24,19 @@ public class PlayerController : MonoBehaviour
     
     private void LateUpdate()
     {
-        Vector3 playerPosition = Camera.main.transform.position;
+        playerPosition = Camera.main.transform.position;
 
         if (Input.GetKeyDown(KeyCode.P)) 
         {
-            GameObject newPin = Instantiate(worldPin,
+            PlacePin();
+        }
+    }
+
+    public void PlacePin()
+    {
+        GameObject newPin = Instantiate(worldPin,
                 new Vector3(playerPosition.x, playerPosition.y, playerPosition.z),
                 Quaternion.identity);
-            allPins.Add(newPin);
-        }
+        allPins.Add(newPin);
     }
 }
