@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 using Microsoft.MixedReality;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 
@@ -32,15 +33,15 @@ public class Compass : MonoBehaviour
         if (conn != null && conn.isIMUUpdated())
         {
             string IMUstring = conn.GetIMUJsonString();
-            string stripped = Strip(IMUstring);
-            float tssHeading = float.Parse(stripped.Substring(stripped.IndexOf("\"heading\":") + 10, 1));
+            JObject jo = JObject.Parse(IMUstring);
+            float tssHeading = jo["imu"]["eva1"]["heading"].ToObject<float>();
 
             cameraOffset = cameraOffset - tssHeading;
         }
 
         cameraYaw -= cameraOffset;
 
-        CompassImage.uvRect = new Rect(heading / 360, 0, 1, 1);
+        CompassImage.uvRect = new Rect(cameraYaw / 360, 0, 1, 1);
     }
     public static string Strip(string S)
     {
