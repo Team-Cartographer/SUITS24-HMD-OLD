@@ -5,14 +5,14 @@ using Unity.XR.CoreUtils;
 using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 
-public class FollowPlayerTransform : MonoBehaviour
+public class FollowPlayerTransform : MonoBehaviour // may delete this script
 {
     Camera playerCamera;
 
     Vector3 playerPosition;
     Vector3 initialPosition;
-    //Quaternion initialRotation;
 
+    // settings for following player (rotate with player, follow player x/y/z, etc.)
     [Header("Camera Offset")]
     [SerializeField] bool ignoreCameraYOffset = true;
     float cameraYOffset;
@@ -29,7 +29,6 @@ public class FollowPlayerTransform : MonoBehaviour
     void Start()
     {
         initialPosition = transform.position;
-        //initialRotation = transform.rotation;
         playerCamera = Camera.main;
     }
 
@@ -38,6 +37,7 @@ public class FollowPlayerTransform : MonoBehaviour
     {
         playerPosition = playerCamera.transform.position;
 
+        // sets movement based on whether bools have been set true or not for the object the script's attached to
         cameraYOffset = ignoreCameraYOffset ? 0 : playerCamera.GetComponentInParent<XROrigin>().CameraYOffset;
         xIgnore = ignoreX ? 0 : 1;
         yIgnore = ignoreY ? 0 : 1;
@@ -45,13 +45,5 @@ public class FollowPlayerTransform : MonoBehaviour
 
         transform.position = new Vector3(playerPosition.x * xIgnore, playerPosition.y * yIgnore - cameraYOffset, 
             playerPosition.z * zIgnore) + initialPosition;
-
-        /*xRotate = rotateX ? 1 : 0;
-        yRotate = rotateY ? 1 : 0;
-        zRotate = rotateZ ? 1 : 0;
-        transform.rotation = new Quaternion(playerCamera.transform.rotation.x + initialRotation.x,
-            playerCamera.transform.rotation.y + initialRotation.y,
-            playerCamera.transform.rotation.z + initialRotation.z,
-            playerCamera.transform.rotation.w + initialRotation.w);*/
     }
 }

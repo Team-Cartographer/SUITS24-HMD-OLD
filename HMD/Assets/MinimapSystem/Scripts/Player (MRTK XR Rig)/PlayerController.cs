@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] GameObject worldPin;
+    [SerializeField] GameObject worldPin; // gets prefab for physical pin to be placed in the world
     [SerializeField] List<GameObject> allPins;
 
     Vector3 playerPosition;
@@ -28,12 +28,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P)) 
         {
-            PlacePin();
+            PlacePin(); // place pin with keyboard for testing purposes
         }
     }
 
     public void PlacePin()
     {
+        // summons a pin at the headset user's position, and adds pin to list of pins present in the current run
         GameObject newPin = Instantiate(worldPin,
                 new Vector3(playerPosition.x, playerPosition.y, playerPosition.z),
                 Quaternion.identity);
