@@ -26,21 +26,26 @@ public class Compass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float cameraYaw = Camera.main.transform.rotation.y;
+        float cameraYaw = Camera.main.transform.rotation.eulerAngles.y;
         float cameraOffset = 0;
 
         TSScConnection conn = connectionHandler.GetConnection();
         if (conn != null && conn.isIMUUpdated())
         {
+
             string IMUstring = conn.GetIMUJsonString();
+
+            // Load IMU data into map
             JObject jo = JObject.Parse(IMUstring);
             float tssHeading = jo["imu"]["eva1"]["heading"].ToObject<float>();
 
             cameraOffset = cameraOffset - tssHeading;
         }
-
+        
+        // Update with tss server/prevent desync
         cameraYaw -= cameraOffset;
 
+        // Rotate image
         CompassImage.uvRect = new Rect(cameraYaw / 360, 0, 1, 1);
     }
     public static string Strip(string S)
