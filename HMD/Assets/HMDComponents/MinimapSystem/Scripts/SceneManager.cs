@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class Compass : MonoBehaviour
+public class SceneManager : MonoBehaviour // basic scene managing script
 {
-
     // Start is called before the first frame update
-    public ConnectionHandler connectionHandler;
     void Start()
     {
-        Debug.Log(connectionHandler.GetConnection());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
     }
 }
