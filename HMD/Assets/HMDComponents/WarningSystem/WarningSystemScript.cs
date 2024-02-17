@@ -17,7 +17,7 @@ public class LMCCNotification // for testing, will delete
 {
     public string infoWarning;
     public string infoTodo;
-    public string isWarning;
+    public bool isWarning;
 }
 
 public class WarningSystemScript : MonoBehaviour
@@ -26,7 +26,7 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text warningDetailsText;
     public RawImage warningVignette;
 
-    [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
+    [SerializeField] static readonly string lmccDeviceIp = "169.234.98.214";
     static readonly string lmccApiCall = "http://" + lmccDeviceIp + "/api/v0?get=notif";
 
     bool warningOccurring;
@@ -40,7 +40,10 @@ public class WarningSystemScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetRequest("steamspy.com/api.php?request=appdetails&appid=730"));
+        StartCoroutine(
+            while true 
+            { GetRequest("steamspy.com/api.php?request=appdetails&appid=730")
+                });
     }
 
     // Update is called once per frame
@@ -50,7 +53,6 @@ public class WarningSystemScript : MonoBehaviour
             if (!warningOccurring) OpenWarning();
             else CloseWarning();
         }
-
 
     }
 
@@ -89,5 +91,4 @@ public class WarningSystemScript : MonoBehaviour
             }
         }
     }
-
 }
