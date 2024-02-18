@@ -24,12 +24,13 @@ public class WarningSystemScript : MonoBehaviour
     static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + "/api/v0?get=notif";
 
     bool warningOccurring;
-    LMCCNotification lmccNotification;
+    bool updatingWarnings;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        warningOccurring = false;
+        updatingWarnings = false;
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class WarningSystemScript : MonoBehaviour
             if (!warningOccurring) OpenWarning();
             else CloseWarning();
         }
-        UpdateLMCCWarnings();
+        if (!updatingWarnings) StartCoroutine(UpdateLMCCWarnings());
     }
 
     void OpenWarning(){
@@ -56,20 +57,9 @@ public class WarningSystemScript : MonoBehaviour
         warningOccurring = false;
     }
 
-    void UpdateLMCCWarnings()
+    IEnumerator UpdateLMCCWarnings()
     {
-        StartCoroutine(GetLMCCWarningRequest());
-        if (lmccNotification.isWarning)
-        {
-            //warningText.text = "Warning:";
-            warningDetailsText.text = lmccNotification.infoWarning;
-            OpenWarning();
-        }
-        else CloseWarning();
-    }
-
-    IEnumerator GetLMCCWarningRequest()
-    {
+        updatingWarnings = true;
         using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGet))
         {
             // Send request and wait for response
@@ -83,8 +73,16 @@ public class WarningSystemScript : MonoBehaviour
             else
             {
                 // Print response to console
-                lmccNotification = JsonUtility.FromJson<LMCCNotification>(webRequest.downloadHandler.text);
+                LMCCNotification lmccNotification = JsonUtility.FromJson<LMCCNotification>(webRequest.downloadHandler.text);
+                if (lmccNotification.isWarning)
+                {
+                    //warningText.text = "Warning:";
+                    warningDetailsText.text = lmccNotification.infoWarning;
+                    OpenWarning();
+                }
+                else CloseWarning();
             }
         }
+        updatingWarnings = false;
     }
 }

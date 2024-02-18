@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello world
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
+  m_sharedMaterial: {fileID: 1543861043015996645, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1504,8 +1504,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: WARNING!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
+  m_sharedMaterial: {fileID: 1543861043015996645, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1998,8 +1998,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello world
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
+  m_sharedMaterial: {fileID: 1543861043015996645, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2127,7 +2127,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -260, y: 110}
-  m_SizeDelta: {x: 210, y: 50}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &443695991
 MonoBehaviour:
@@ -2151,8 +2151,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Current Task:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
+  m_sharedMaterial: {fileID: 1543861043015996645, guid: 65d4c3d07ac78c04d965380ad5d4cd49, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2377,6 +2377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 626001462}
   - component: {fileID: 626001463}
+  - component: {fileID: 626001464}
   m_Layer: 0
   m_Name: WorldMap
   m_TagString: Untagged
@@ -2419,14 +2420,26 @@ MonoBehaviour:
   m_MovementSpeed: 6
   m_MovementSpeedVariancePercentage: 0.25
   m_SnapOnEnable: 1
-  m_PositionFollowMode: 0
+  m_PositionFollowMode: 1
   m_MinDistanceAllowed: 0.01
   m_MaxDistanceAllowed: 0.02
-  m_TimeUntilThresholdReachesMaxDistance: 3
+  m_TimeUntilThresholdReachesMaxDistance: 1
   m_RotationFollowMode: 2
   m_MinAngleAllowed: 0.1
   m_MaxAngleAllowed: 5
   m_TimeUntilThresholdReachesMaxAngle: 3
+--- !u!114 &626001464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626001461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf871a0ca6ef474ea1369b792a9b58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &628870397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3641,8 +3654,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256445727}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17133157, y: 1.585645, z: 0.4620461}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4658,11 +4671,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677198132670553562, guid: f64620d502cdf0f429efa27703913cb7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -90.00004
+      value: -90.000015
       objectReference: {fileID: 0}
     - target: {fileID: 5677198132670553562, guid: f64620d502cdf0f429efa27703913cb7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000022888184
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 5677198132670553562, guid: f64620d502cdf0f429efa27703913cb7, type: 3}
       propertyPath: m_ConstrainProportionsScale
