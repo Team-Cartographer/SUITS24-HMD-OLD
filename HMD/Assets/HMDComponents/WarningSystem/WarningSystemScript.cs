@@ -20,13 +20,8 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text warningDetailsText;
     public RawImage warningVignette;
 
-<<<<<<< Updated upstream
     [SerializeField] static readonly string lmccDeviceIp = "169.234.98.214";
-    static readonly string lmccApiCall = "http://" + lmccDeviceIp + "/api/v0?get=notif";
-=======
-    [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
     static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + "/api/v0?get=notif";
->>>>>>> Stashed changes
 
     bool warningOccurring;
     LMCCNotification lmccNotification;
@@ -34,14 +29,7 @@ public class WarningSystemScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< Updated upstream
-        StartCoroutine(
-            while true 
-            { GetRequest("steamspy.com/api.php?request=appdetails&appid=730")
-                });
-=======
         
->>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -51,11 +39,7 @@ public class WarningSystemScript : MonoBehaviour
             if (!warningOccurring) OpenWarning();
             else CloseWarning();
         }
-
-<<<<<<< Updated upstream
-=======
-        //UpdateLMCCWarnings();
->>>>>>> Stashed changes
+        UpdateLMCCWarnings();
     }
 
     void OpenWarning(){
@@ -74,7 +58,7 @@ public class WarningSystemScript : MonoBehaviour
 
     void UpdateLMCCWarnings()
     {
-        //StartCoroutine(GetLMCCWarningRequest());
+        StartCoroutine(GetLMCCWarningRequest());
         if (lmccNotification.isWarning)
         {
             //warningText.text = "Warning:";
