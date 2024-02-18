@@ -14,6 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 8748073876973138714}
   m_InitManagerOnStart: 1
+--- !u!114 &-2667419947847618916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c3631f5e58749a59194e0cf6baf6d5, type: 3}
+  m_Name: Android Providers
+  m_EditorClassIdentifier: 
+  m_RequiresSettingsUpdate: 0
+  m_AutomaticLoading: 0
+  m_AutomaticRunning: 0
+  m_Loaders:
+  - {fileID: 11400000, guid: 24beb94bce0c5ee44a950f42fa075a73, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26,11 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dc886499c26824283350fa532d087d, type: 3}
   m_Name: XRGeneralSettingsPerBuildTarget
   m_EditorClassIdentifier: 
-  Keys: 010000000d0000000e000000
+  Keys: 010000000d0000000e00000007000000
   Values:
   - {fileID: 1291584357145590083}
   - {fileID: -6359134659791937977}
   - {fileID: 5546821791038410992}
+  - {fileID: 3973792304842382301}
 --- !u!114 &1291584357145590083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +80,20 @@ MonoBehaviour:
   m_AutomaticRunning: 0
   m_Loaders:
   - {fileID: 11400000, guid: ce97428cbe35af94eaf8cc2c439dfd5b, type: 2}
+--- !u!114 &3973792304842382301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
+  m_Name: Android Settings
+  m_EditorClassIdentifier: 
+  m_LoaderManagerInstance: {fileID: -2667419947847618916}
+  m_InitManagerOnStart: 1
 --- !u!114 &5546821791038410992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +125,7 @@ MonoBehaviour:
   m_AutomaticRunning: 0
   m_Loaders:
   - {fileID: 11400000, guid: ce97428cbe35af94eaf8cc2c439dfd5b, type: 2}
+  - {fileID: 11400000, guid: 24beb94bce0c5ee44a950f42fa075a73, type: 2}
 --- !u!114 &8748073876973138714
 MonoBehaviour:
   m_ObjectHideFlags: 0

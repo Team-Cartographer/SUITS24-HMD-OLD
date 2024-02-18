@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MinimapTestScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/WarningTestScene.unity
+    guid: ba5a811da1138684c9459773e33b180f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 57f85c892ead5944ab3ae25b351a3a59, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: ace11f6435d304f4f890576860e5f0fc, type: 2}

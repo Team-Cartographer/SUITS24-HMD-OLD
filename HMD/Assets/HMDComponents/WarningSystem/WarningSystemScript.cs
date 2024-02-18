@@ -4,16 +4,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Unity.VisualScripting;
 
 [System.Serializable]
-public class SteamGame // for testing, will delete
-{
-    public string name;
-    public string developer;
-}
-
-[System.Serializable]
-public class LMCCNotification // for testing, will delete
+public class LMCCNotification
 {
     public string infoWarning;
     public string infoTodo;
@@ -26,24 +20,28 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text warningDetailsText;
     public RawImage warningVignette;
 
+<<<<<<< Updated upstream
     [SerializeField] static readonly string lmccDeviceIp = "169.234.98.214";
     static readonly string lmccApiCall = "http://" + lmccDeviceIp + "/api/v0?get=notif";
+=======
+    [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
+    static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + "/api/v0?get=notif";
+>>>>>>> Stashed changes
 
     bool warningOccurring;
-
-
-    /*public static async String[] ApiCaller
-    {
-        Debug.Log("Hello world");
-    }*/
+    LMCCNotification lmccNotification;
 
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< Updated upstream
         StartCoroutine(
             while true 
             { GetRequest("steamspy.com/api.php?request=appdetails&appid=730")
                 });
+=======
+        
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
@@ -54,6 +52,10 @@ public class WarningSystemScript : MonoBehaviour
             else CloseWarning();
         }
 
+<<<<<<< Updated upstream
+=======
+        //UpdateLMCCWarnings();
+>>>>>>> Stashed changes
     }
 
     void OpenWarning(){
@@ -70,9 +72,21 @@ public class WarningSystemScript : MonoBehaviour
         warningOccurring = false;
     }
 
-    IEnumerator GetRequest(string uri)
+    void UpdateLMCCWarnings()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        //StartCoroutine(GetLMCCWarningRequest());
+        if (lmccNotification.isWarning)
+        {
+            //warningText.text = "Warning:";
+            warningDetailsText.text = lmccNotification.infoWarning;
+            OpenWarning();
+        }
+        else CloseWarning();
+    }
+
+    IEnumerator GetLMCCWarningRequest()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGet))
         {
             // Send request and wait for response
             yield return webRequest.SendWebRequest();
@@ -85,9 +99,7 @@ public class WarningSystemScript : MonoBehaviour
             else
             {
                 // Print response to console
-                //Debug.Log("API Response: " + webRequest.downloadHandler.text);
-                SteamGame csgo = JsonUtility.FromJson<SteamGame>(webRequest.downloadHandler.text);
-                Debug.Log(csgo.name);
+                lmccNotification = JsonUtility.FromJson<LMCCNotification>(webRequest.downloadHandler.text);
             }
         }
     }
