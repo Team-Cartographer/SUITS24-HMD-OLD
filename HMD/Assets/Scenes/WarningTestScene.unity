@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello world
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
+  m_sharedMaterial: {fileID: -6087612344019291607, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1504,8 +1504,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: WARNING!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
+  m_sharedMaterial: {fileID: -6087612344019291607, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1998,8 +1998,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello world
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
+  m_sharedMaterial: {fileID: -6087612344019291607, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2126,8 +2126,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: 110}
-  m_SizeDelta: {x: 210, y: 50}
+  m_AnchoredPosition: {x: -240, y: 110}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &443695991
 MonoBehaviour:
@@ -2151,8 +2151,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Current Task:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
-  m_sharedMaterial: {fileID: 80445823015032978, guid: 5a1647889c7ab744a8c0aec7de2eef64, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
+  m_sharedMaterial: {fileID: -6087612344019291607, guid: d574d663378443349b9bf7dfdd652d9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
