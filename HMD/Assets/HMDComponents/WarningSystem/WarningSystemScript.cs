@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 public class LMCCNotification
 {
     public string infoWarning;
-    public string infoTodo;
+    public string[][] todoItems;
     public bool isWarning;
 }
 
@@ -18,10 +18,12 @@ public class WarningSystemScript : MonoBehaviour
 {
     public TMP_Text warningText;
     public TMP_Text warningDetailsText;
+    public TMP_Text messageText;
+    public TMP_Text messageDetailsText;
     public RawImage warningVignette;
 
-    [SerializeField] static readonly string lmccDeviceIp = "169.234.98.214";
-    static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + "/api/v0?get=notif";
+    [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
+    static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + ":3001/api/v0?get=notif";
 
     bool warningOccurring;
     bool updatingWarnings;
@@ -74,6 +76,8 @@ public class WarningSystemScript : MonoBehaviour
             {
                 // Print response to console
                 LMCCNotification lmccNotification = JsonUtility.FromJson<LMCCNotification>(webRequest.downloadHandler.text);
+
+
                 if (lmccNotification.isWarning)
                 {
                     //warningText.text = "Warning:";
@@ -81,6 +85,12 @@ public class WarningSystemScript : MonoBehaviour
                     OpenWarning();
                 }
                 else CloseWarning();
+                
+                string[][] todoItems = lmccNotification.todoItems;
+                Debug.Log("todo[0][0]");
+                Debug.Log(todoItems[0][0]);
+
+                messageDetailsText.text = todoItems[0][0];
             }
         }
         updatingWarnings = false;
