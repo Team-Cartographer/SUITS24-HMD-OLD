@@ -11,21 +11,8 @@ using Newtonsoft.Json;
 public class LMCCNotification
 {
     public string infoWarning;
-    public string[][] todoItems; // Use an array of TodoItem objects instead of a 2D array
+    public string[][] todoItems;
     public bool isWarning;
-}
-
-[System.Serializable]
-public class TodoItem
-{
-    public string[] items; // This holds the items in your todo list
-
-    // Override the ToString method
-    public override string ToString()
-    {
-        // Use string.Join to concatenate all elements, separated by a comma (or choose another separator)
-        return $"TodoItem: [{string.Join(", ", items)}]";
-    }
 }
 
 public class WarningSystemScript : MonoBehaviour
@@ -100,8 +87,43 @@ public class WarningSystemScript : MonoBehaviour
                 }
                 else CloseWarning();
 
-                Debug.Log(lmccNotification.todoItems[0][0]);
-                //messageDetailsText.text = lmccNotification.todoItems[0][0];
+
+                // look into optimizing this next code block
+                bool allDone = true;
+                if (lmccNotification.todoItems != null)
+                {
+                    foreach (var todoItem in lmccNotification.todoItems)
+                    {
+                        if (todoItem[1] != "True")
+                        {
+                            allDone = false;
+                            break;
+                        }
+                    }
+                }
+
+                
+                if (lmccNotification.todoItems == null || allDone)
+                {  // This part is not optimized, but is designed to be readable
+                    messageText.gameObject.SetActive(false);
+                    messageDetailsText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    messageText.gameObject.SetActive(true);
+                    messageDetailsText.gameObject.SetActive(true);
+
+                    //look into optimizing this next part
+                    foreach (var todoItem in lmccNotification.todoItems)
+                    {
+                        if (todoItem[1] != "True")
+                        {
+                            messageDetailsText.text = todoItem[0];
+                            break;
+                        }
+                    }
+                }
+                
             }
         }
         updatingWarnings = false;
