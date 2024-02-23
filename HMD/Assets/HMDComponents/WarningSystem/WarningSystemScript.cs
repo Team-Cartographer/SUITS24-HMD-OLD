@@ -5,13 +5,27 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using Unity.VisualScripting;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class LMCCNotification
 {
     public string infoWarning;
-    public string[][] todoItems;
+    public string[][] todoItems; // Use an array of TodoItem objects instead of a 2D array
     public bool isWarning;
+}
+
+[System.Serializable]
+public class TodoItem
+{
+    public string[] items; // This holds the items in your todo list
+
+    // Override the ToString method
+    public override string ToString()
+    {
+        // Use string.Join to concatenate all elements, separated by a comma (or choose another separator)
+        return $"TodoItem: [{string.Join(", ", items)}]";
+    }
 }
 
 public class WarningSystemScript : MonoBehaviour
@@ -75,7 +89,7 @@ public class WarningSystemScript : MonoBehaviour
             else
             {
                 // Print response to console
-                LMCCNotification lmccNotification = JsonUtility.FromJson<LMCCNotification>(webRequest.downloadHandler.text);
+                LMCCNotification lmccNotification = JsonConvert.DeserializeObject<LMCCNotification>(webRequest.downloadHandler.text);
 
 
                 if (lmccNotification.isWarning)
@@ -85,12 +99,9 @@ public class WarningSystemScript : MonoBehaviour
                     OpenWarning();
                 }
                 else CloseWarning();
-                
-                string[][] todoItems = lmccNotification.todoItems;
-                Debug.Log("todo[0][0]");
-                Debug.Log(todoItems[0][0]);
 
-                messageDetailsText.text = todoItems[0][0];
+                Debug.Log(lmccNotification.todoItems[0][0]);
+                //messageDetailsText.text = lmccNotification.todoItems[0][0];
             }
         }
         updatingWarnings = false;
