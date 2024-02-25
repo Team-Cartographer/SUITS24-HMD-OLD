@@ -7,13 +7,13 @@ using UnityEngine;
 public class ConnectionHandler : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TSScConnection TSSc;
+    public GatewayConnection TSSc;
     void Start()
     {
-        TSSc.ConnectToHost("172.24.196.222", 2, 14141);
+        TSSc.ConnectToHost("127.0.0.1", 2, 3001);
     }
 
-    public TSScConnection GetConnection()
+    public GatewayConnection GetConnection()
     {
         return this.TSSc;
     }

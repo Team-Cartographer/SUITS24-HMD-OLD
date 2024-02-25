@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Json;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Rendering;
-using Microsoft.MixedReality;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
@@ -27,7 +21,7 @@ public class Compass : MonoBehaviour
         float cameraYaw = Camera.main.transform.rotation.eulerAngles.y;
         float cameraOffset = 0;
 
-        TSScConnection conn = connectionHandler.GetConnection();
+        GatewayConnection conn = connectionHandler.GetConnection();
         if (conn != null && conn.isIMUUpdated())
         {
 
