@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
-
-using TMPro;
 
 public class TSScConnection : MonoBehaviour
 {
@@ -36,7 +32,7 @@ public class TSScConnection : MonoBehaviour
     public void ConnectToHost(string host, int team_number)
     {
         this.host = host;
-        this.port = "14141";
+        this.port = "3001";
         this.team_number = team_number;
         this.url = "http://" + this.host + ":" + this.port;
         Debug.Log(this.url);
@@ -121,7 +117,7 @@ public class TSScConnection : MonoBehaviour
 
     IEnumerator GetUIAState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/UIA.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/uia"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -155,7 +151,7 @@ public class TSScConnection : MonoBehaviour
 
     IEnumerator GetDCUState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/DCU.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/dcu"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -190,7 +186,7 @@ public class TSScConnection : MonoBehaviour
 
     IEnumerator GetROVERState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/ROVER.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/rover"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -225,7 +221,7 @@ public class TSScConnection : MonoBehaviour
 
     IEnumerator GetSPECState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/SPEC.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/spec"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -295,7 +291,7 @@ public class TSScConnection : MonoBehaviour
 
     IEnumerator GetCOMMState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/COMM.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/comm"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -330,7 +326,7 @@ public class TSScConnection : MonoBehaviour
 
     IEnumerator GetIMUState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/IMU.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/imu"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();

@@ -10,7 +10,7 @@ public class ConnectionHandler : MonoBehaviour
     public TSScConnection TSSc;
     void Start()
     {
-        TSSc.ConnectToHost("172.24.196.222", 2, 14141);
+        TSSc.ConnectToHost("127.0.0.1", 2, 3001);
     }
 
     public TSScConnection GetConnection()
