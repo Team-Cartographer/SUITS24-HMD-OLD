@@ -21,7 +21,7 @@ public class Compass : MonoBehaviour
         float cameraYaw = Camera.main.transform.rotation.eulerAngles.y;
         float cameraOffset = 0;
 
-        TSScConnection conn = connectionHandler.GetConnection();
+        GatewayConnection conn = connectionHandler.GetConnection();
         if (conn != null && conn.isIMUUpdated())
         {
 

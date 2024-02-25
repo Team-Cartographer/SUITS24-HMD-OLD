@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TSScConnection : MonoBehaviour
+public class GatewayConnection : MonoBehaviour
 {
     // Connection
     string host;
@@ -27,6 +27,14 @@ public class TSScConnection : MonoBehaviour
     string COMMJsonString;
     bool IMUUpdated;
     string IMUJsonString;
+    bool ERRORUpdated;
+    string ERRORJsonString;
+    bool ROCKDATAUpdated;
+    string ROCKDATAJsonString;
+    bool EVAINFOUpdated;
+    string EVAINFOJsonString;
+    bool TSSINFOUpdated;
+    string TSSINFOJsonString;
 
     // Connect to TSSc with a specific team number
     public void ConnectToHost(string host, int team_number)
@@ -82,6 +90,12 @@ public class TSScConnection : MonoBehaviour
                 StartCoroutine(GetTELEMETRYState());
                 StartCoroutine(GetCOMMState());
                 StartCoroutine(GetIMUState());
+
+                StartCoroutine(GetERRORState());
+                StartCoroutine(GetROCKDATAState());
+                StartCoroutine(GetEVAINFOState());
+                StartCoroutine(GetTSSINFOState());
+
                 time_since_last_update = 0.0f;
             }
         }
@@ -252,6 +266,42 @@ public class TSScConnection : MonoBehaviour
         return SPECUpdated;
     }
 
+
+    ///////////////////////////////////////////// ERROR
+    IEnumerator GetERRORState()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/error"))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    if (this.ERRORJsonString != webRequest.downloadHandler.text)
+                    {
+                        this.ERRORUpdated = true;
+                        this.ERRORJsonString = webRequest.downloadHandler.text;
+                        Debug.Log(this.ERRORJsonString);
+                    }
+                    break;
+            }
+
+        }
+    }
+
+    public string GetERRORJsonString()
+    {
+        ERRORUpdated = false;
+        return this.ERRORJsonString;
+    }
+
+    public bool isERRORUpdated()
+    {
+        return ERRORUpdated;
+    }
+
+
     ///////////////////////////////////////////// TELEMETRY
 
     IEnumerator GetTELEMETRYState()
@@ -357,7 +407,108 @@ public class TSScConnection : MonoBehaviour
         return IMUUpdated;
     }
 
+    ///////////////////////////////////////////// ROCKDATA
 
+    IEnumerator GetROCKDATAState()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/rockdata"))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
 
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    if (this.ROCKDATAJsonString != webRequest.downloadHandler.text)
+                    {
+                        this.ROCKDATAUpdated = true;
+                        this.ROCKDATAJsonString = webRequest.downloadHandler.text;
+                        Debug.Log(this.ROCKDATAJsonString);
+                    }
+                    break;
+            }
 
+        }
+    }
+
+    public string GetROCKDATAJsonString()
+    {
+        ROCKDATAUpdated = false;
+        return this.ROCKDATAJsonString;
+    }
+
+    public bool isROCKDATAUpdated()
+    {
+        return ROCKDATAUpdated;
+    }
+
+    ///////////////////////////////////////////// EVAINFO
+
+    IEnumerator GetEVAINFOState()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/eva_info"))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    if (this.EVAINFOJsonString != webRequest.downloadHandler.text)
+                    {
+                        this.EVAINFOUpdated = true;
+                        this.EVAINFOJsonString = webRequest.downloadHandler.text;
+                        Debug.Log(this.EVAINFOJsonString);
+                    }
+                    break;
+            }
+
+        }
+    }
+
+    public string GetEVAINFOJsonString()
+    {
+        EVAINFOUpdated = false;
+        return this.EVAINFOJsonString;
+    }
+
+    public bool isEVAINFOUpdated()
+    {
+        return EVAINFOUpdated;
+    }
+
+    ///////////////////////////////////////////// TSSINFO
+
+    IEnumerator GetTSSINFOState()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/info"))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    if (this.TSSINFOJsonString != webRequest.downloadHandler.text)
+                    {
+                        this.TSSINFOUpdated = true;
+                        this.TSSINFOJsonString = webRequest.downloadHandler.text;
+                        Debug.Log(this.TSSINFOJsonString);
+                    }
+                    break;
+            }
+
+        }
+    }
+
+    public string GetTSSINFOJsonString()
+    {
+        TSSINFOUpdated = false;
+        return this.TSSINFOJsonString;
+    }
+
+    public bool isTSSINFOUpdated()
+    {
+        return TSSINFOUpdated;
+    }
 }
