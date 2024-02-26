@@ -23,8 +23,9 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text messageDetailsText;
     public RawImage warningVignette;
     public TMP_Text todoBody;
+    public TMP_Text todoHeader;
 
-    [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
+    [SerializeField] static readonly string lmccDeviceIp = "10.56.194.5";
     static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + ":3001/api/v0?get=notif";
 
     bool warningOccurring;
@@ -65,6 +66,18 @@ public class WarningSystemScript : MonoBehaviour
         warningDetailsText.gameObject.SetActive(false);
         warningVignette.gameObject.SetActive(false);
         warningOccurring = false;
+    }
+
+    void OpenTodo()
+    {
+        todoBody.gameObject.SetActive(true);
+        todoHeader.gameObject.SetActive(true);
+    }
+
+    void CloseTodo()
+    {
+        todoBody.gameObject.SetActive(false);
+        todoHeader.gameObject.SetActive(false);
     }
 
     IEnumerator UpdateLMCCWarnings()
@@ -138,19 +151,24 @@ public class WarningSystemScript : MonoBehaviour
                 // Again, look into optimizations later
                 if (lmccNotification.todoItems != null)
                 {
-                    string newTodoList = "";
+                    OpenTodo();
+                    string newTodoList = " ";
                     foreach (var todoItem in lmccNotification.todoItems)
                     {
                         if (todoItem[1] != "True")
                         {
-                            newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n";
+                            newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n ";
                         }
                         else
                         {
-                            newTodoList += "-<indent=5%> <s>" + todoItem[0] + "</s><indent=0%>\n";
+                            newTodoList += "- <s>" + todoItem[0] + "</s><indent=0%>\n ";
                         }
                     }
                     todoBody.text = newTodoList;
+                }
+                else
+                {
+                    CloseTodo();
                 }
                 
             }
