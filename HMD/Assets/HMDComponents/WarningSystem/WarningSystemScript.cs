@@ -23,7 +23,7 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text messageDetailsText;
     public RawImage warningVignette;
     public TMP_Text todoBody;
-    public TMP_Text todoHeader;
+    public Canvas todoCanvas;
 
     [SerializeField] static readonly string lmccDeviceIp = "10.56.194.5";
     static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + ":3001/api/v0?get=notif";
@@ -42,13 +42,13 @@ public class WarningSystemScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.X)){
-            if (todoBody.gameObject.activeSelf)
+            if (todoCanvas.gameObject.activeSelf)
             {
-                todoBody.gameObject.SetActive(false);
+                todoCanvas.gameObject.SetActive(false);
             }
             else
             {
-                todoBody.gameObject.SetActive(true);
+                todoCanvas.gameObject.SetActive(true);
             }
         }
         if (!updatingWarnings) StartCoroutine(UpdateLMCCWarnings());
@@ -68,17 +68,6 @@ public class WarningSystemScript : MonoBehaviour
         warningOccurring = false;
     }
 
-    void OpenTodo()
-    {
-        todoBody.gameObject.SetActive(true);
-        todoHeader.gameObject.SetActive(true);
-    }
-
-    void CloseTodo()
-    {
-        todoBody.gameObject.SetActive(false);
-        todoHeader.gameObject.SetActive(false);
-    }
 
     IEnumerator UpdateLMCCWarnings()
     {
@@ -151,24 +140,23 @@ public class WarningSystemScript : MonoBehaviour
                 // Again, look into optimizations later
                 if (lmccNotification.todoItems != null)
                 {
-                    OpenTodo();
-                    string newTodoList = " ";
+                    string newTodoList = "\t";
                     foreach (var todoItem in lmccNotification.todoItems)
                     {
                         if (todoItem[1] != "True")
                         {
-                            newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n ";
+                            newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n\t";
                         }
                         else
                         {
-                            newTodoList += "- <s>" + todoItem[0] + "</s><indent=0%>\n ";
+                            newTodoList += "- <s>" + todoItem[0] + "</s><indent=0%>\n\t";
                         }
                     }
                     todoBody.text = newTodoList;
                 }
                 else
                 {
-                    CloseTodo();
+                    todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
                 }
                 
             }

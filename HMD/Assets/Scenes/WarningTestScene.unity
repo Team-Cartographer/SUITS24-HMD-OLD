@@ -1319,8 +1319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 75, y: 0}
-  m_SizeDelta: {x: 128, y: 0}
+  m_AnchoredPosition: {x: 41.04, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341122559
 MonoBehaviour:
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '\nHello world\n '
+  m_text: \n\tHello World\n\t
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68fa23d3d61d5b343b4590c111ca79d2, type: 2}
   m_sharedMaterial: {fileID: 3609987155514583290, guid: 68fa23d3d61d5b343b4590c111ca79d2, type: 2}
@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 2
 --- !u!1001 &350733102
 PrefabInstance:
@@ -3459,7 +3459,7 @@ GameObject:
   - component: {fileID: 982026337}
   - component: {fileID: 982026336}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: TaskCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5571,7 +5571,7 @@ MonoBehaviour:
   messageDetailsText: {fileID: 60165042}
   warningVignette: {fileID: 1264754110}
   todoBody: {fileID: 341122559}
-  todoHeader: {fileID: 1996680843}
+  todoCanvas: {fileID: 982026338}
 --- !u!1001 &2083776136
 PrefabInstance:
   m_ObjectHideFlags: 0
