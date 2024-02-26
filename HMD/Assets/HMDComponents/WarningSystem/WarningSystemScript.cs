@@ -22,6 +22,7 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text messageText;
     public TMP_Text messageDetailsText;
     public RawImage warningVignette;
+    public TMP_Text todoBody;
 
     [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
     static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + ":3001/api/v0?get=notif";
@@ -40,8 +41,14 @@ public class WarningSystemScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.X)){
-            if (!warningOccurring) OpenWarning();
-            else CloseWarning();
+            if (todoBody.gameObject.activeSelf)
+            {
+                todoBody.gameObject.SetActive(false);
+            }
+            else
+            {
+                todoBody.gameObject.SetActive(true);
+            }
         }
         if (!updatingWarnings) StartCoroutine(UpdateLMCCWarnings());
     }
@@ -88,6 +95,7 @@ public class WarningSystemScript : MonoBehaviour
                 else CloseWarning();
 
 
+                // Top left todo dislpay
                 // look into optimizing this next code block
                 bool allDone = true;
                 if (lmccNotification.todoItems != null)
@@ -122,6 +130,27 @@ public class WarningSystemScript : MonoBehaviour
                             break;
                         }
                     }
+                }
+
+
+
+                // Larger todo screen
+                // Again, look into optimizations later
+                if (lmccNotification.todoItems != null)
+                {
+                    string newTodoList = "";
+                    foreach (var todoItem in lmccNotification.todoItems)
+                    {
+                        if (todoItem[1] != "True")
+                        {
+                            newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n";
+                        }
+                        else
+                        {
+                            newTodoList += "-<indent=5%> <s>" + todoItem[0] + "</s><indent=0%>\n";
+                        }
+                    }
+                    todoBody.text = newTodoList;
                 }
                 
             }
