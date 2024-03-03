@@ -1,6 +1,6 @@
 # NASA SUITS 2024 HMD App :eyeglasses:
 
-Team Cartographer's LMCC (Local Mission Control Console) code for the NASA SUITS (Spacesuit User Interface Technologies for Students) Challenge 2023/24. <br>
+Team Cartographer's HMD (Head Mounted Device) code for the NASA SUITS (Spacesuit User Interface Technologies for Students) Challenge 2023/24. <br>
 
 This project relies on [Microsoft's Mixed Reality ToolKit](https://learn.microsoft.com/en-us/windows/mixed-reality/mrtk-unity/mrtk3-overview/), as well as [Meta's Quest Unity Toolings](https://developer.oculus.com/documentation/unity/unity-gs-overview/) for build support.
 
