@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using Newtonsoft.Json.Linq;
 
 
-
 public class Compass : MonoBehaviour
 {
     public RawImage CompassImage;

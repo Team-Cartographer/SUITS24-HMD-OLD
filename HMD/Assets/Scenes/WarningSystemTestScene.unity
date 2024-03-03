@@ -3824,8 +3824,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1183467020}
-  - component: {fileID: 1183467021}
   - component: {fileID: 1183467019}
+  - component: {fileID: 1183467018}
   m_Layer: 0
   m_Name: NetworkingObject
   m_TagString: Untagged
@@ -3845,7 +3845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163d6911bf1c2e442a5b9b54e87f4ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GatewayConnection: {fileID: 0}
+  gatewayConnection: {fileID: 1183467019}
 --- !u!114 &1183467019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3858,7 +3858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1becddf303520646883e669673ef42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TSSc: {fileID: 1183467021}
 --- !u!4 &1183467020
 Transform:
   m_ObjectHideFlags: 0
@@ -3874,18 +3873,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1183467021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183467017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1becddf303520646883e669673ef42d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1209407945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,7 +4346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CompassImage: {fileID: 1507819949}
-  connectionHandler: {fileID: 1183467019}
+  connectionHandler: {fileID: 1183467018}
 --- !u!114 &1344467286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5816,6 +5803,6 @@ SceneRoots:
   - {fileID: 1183467020}
   - {fileID: 368430207}
   - {fileID: 774766600}
-  - {fileID: 1316536834}
-  - {fileID: 1876235923}
   - {fileID: 2008639532}
+  - {fileID: 1876235923}
+  - {fileID: 1316536834}

@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CompassImage: {fileID: 720697824}
-  connectionHandler: {fileID: 1576975799}
+  connectionHandler: {fileID: 1576975798}
 --- !u!1001 &507855128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -530,7 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576975796}
   - component: {fileID: 1576975797}
-  - component: {fileID: 1576975799}
+  - component: {fileID: 1576975798}
   m_Layer: 0
   m_Name: NetworkingObject
   m_TagString: Untagged
@@ -562,10 +562,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1576975794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c21b65e7369fed4a9ec3061158a1a4b, type: 3}
+  m_Script: {fileID: 11500000, guid: a1becddf303520646883e669673ef42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1576975799
+--- !u!114 &1576975798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,10 +574,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1576975794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0383f90c580a924495e5ce276c1f09c, type: 3}
+  m_Script: {fileID: 11500000, guid: 163d6911bf1c2e442a5b9b54e87f4ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TSSc: {fileID: 1576975797}
+  gatewayConnection: {fileID: 1576975797}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
