@@ -7,15 +7,15 @@ using UnityEngine;
 public class ConnectionHandler : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GatewayConnection TSSc;
+    public GatewayConnection GatewayConnection;
     void Start()
     {
-        TSSc.ConnectToHost("127.0.0.1", 2, 3001);
+        GatewayConnection.ConnectToHost("127.0.0.1", 2, 3001);
     }
 
     public GatewayConnection GetConnection()
     {
-        return this.TSSc;
+        return this.GatewayConnection;
     }
 
     // Update is called once per frame
