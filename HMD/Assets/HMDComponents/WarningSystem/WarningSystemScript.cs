@@ -25,7 +25,7 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text todoBody;
     public Canvas todoCanvas;
 
-    [SerializeField] static readonly string lmccDeviceIp = "10.56.194.5";
+    [SerializeField] static readonly string lmccDeviceIp = "127.0.0.1";
     static readonly string lmccApiCallGet = "http://" + lmccDeviceIp + ":3001/api/v0?get=notif";
 
     bool warningOccurring;
