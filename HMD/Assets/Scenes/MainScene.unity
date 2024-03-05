@@ -1319,7 +1319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 41.04, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341122559
@@ -3826,6 +3826,7 @@ GameObject:
   - component: {fileID: 1183467020}
   - component: {fileID: 1183467021}
   - component: {fileID: 1183467019}
+  - component: {fileID: 1183467018}
   m_Layer: 0
   m_Name: NetworkingObject
   m_TagString: Untagged
@@ -3858,7 +3859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1becddf303520646883e669673ef42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TSSc: {fileID: 1183467021}
 --- !u!4 &1183467020
 Transform:
   m_ObjectHideFlags: 0
@@ -4359,7 +4359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CompassImage: {fileID: 1507819949}
-  connectionHandler: {fileID: 1183467019}
+  connectionHandler: {fileID: 1183467018}
 --- !u!114 &1344467286
 MonoBehaviour:
   m_ObjectHideFlags: 0
