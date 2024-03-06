@@ -27,7 +27,7 @@ public class LMCCPinsController : MonoBehaviour
     bool updatingPins;
 
     readonly double[] mapCenterLatLon = { 29.564882056524166, -95.081497230282139 };
-    readonly double[] latLongToMeter = { 8.989e-6, 1.122e-5 };
+    readonly double[] latLongToMeter = { 110836.0, 97439.0 };
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +70,7 @@ public class LMCCPinsController : MonoBehaviour
             if (!pin.worldPin)
             {
                 double[] convertedCoords = ConvertLatLongToMeter(pin.coordinates);
-                Vector3 worldPos = new Vector3((float)convertedCoords[0], 0, (float)convertedCoords[1]);
+                Vector3 worldPos = new Vector3((float)convertedCoords[0], 0, (float) convertedCoords[2]);
                 pin.worldPin = Instantiate(worldPin, worldPos, Quaternion.identity);
             }
         }
@@ -78,9 +78,9 @@ public class LMCCPinsController : MonoBehaviour
 
     double[] ConvertLatLongToMeter(double[] lmccPinCoords)
     {
-        double latToX = (mapCenterLatLon[0] - lmccPinCoords[0]) * 111.111;
-        double latToZ = (mapCenterLatLon[1] - lmccPinCoords[1]) * 111.111;
-        return new double[] { latToX, latToZ };
+        double latToZ = (mapCenterLatLon[0] - lmccPinCoords[0]) * 111111;
+        double longToX = (mapCenterLatLon[1] - lmccPinCoords[1]) * 111111;
+        return new double[] { latToZ, 0, longToX };
     }
 
     void AddAndRemoveLMCCPins(UnityWebRequest webRequest)
