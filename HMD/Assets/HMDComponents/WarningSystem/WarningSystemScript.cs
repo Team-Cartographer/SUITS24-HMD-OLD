@@ -161,6 +161,7 @@ public class WarningSystemScript : MonoBehaviour
                 
             }
         }
+        yield return new WaitForSecondsRealtime(0.25f);
         updatingWarnings = false;
     }
 }
