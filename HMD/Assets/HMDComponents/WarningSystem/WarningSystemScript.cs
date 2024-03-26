@@ -7,15 +7,6 @@ using UnityEngine.Networking;
 using Unity.VisualScripting;
 using Newtonsoft.Json;
 
-/*
-[System.Serializable]
-public class LMCCNotification
-{
-    public string infoWarning;
-    public string[][] todoItems;
-    public bool isWarning;
-}
-*/
 
 [System.Serializable]
 public class LMCCWarning
@@ -197,70 +188,3 @@ public class WarningSystemScript : MonoBehaviour
             }
         }
     }
-
-    /*
-
-
-    // Top left todo dislpay
-    // look into optimizing this next code block
-    bool allDone = true;
-    if (lmccNotification.todoItems != null)
-    {
-        foreach (var todoItem in lmccNotification.todoItems)
-        {
-            if (todoItem[1] != "True")
-            {
-                allDone = false;
-                break;
-            }
-        }
-    }
-
-
-    if (lmccNotification.todoItems == null || allDone)
-    {  // This part is not optimized, but is designed to be readable
-        messageText.gameObject.SetActive(false);
-        messageDetailsText.gameObject.SetActive(false);
-    }
-    else
-    {
-        messageText.gameObject.SetActive(true);
-        messageDetailsText.gameObject.SetActive(true);
-
-        //look into optimizing this next part
-        foreach (var todoItem in lmccNotification.todoItems)
-        {
-            if (todoItem[1] != "True")
-            {
-                messageDetailsText.text = todoItem[0];
-                break;
-            }
-        }
-    }
-
-
-
-    // Larger todo screen
-    // Again, look into optimizations later
-    if (lmccNotification.todoItems != null)
-    {
-        string newTodoList = "\t";
-        foreach (var todoItem in lmccNotification.todoItems)
-        {
-            if (todoItem[1] != "True")
-            {
-                newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n\t";
-            }
-            else
-            {
-                newTodoList += "- <s>" + todoItem[0] + "</s><indent=0%>\n\t";
-            }
-        }
-        todoBody.text = newTodoList;
-    }
-    else
-    {
-        todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
-    }
-    */
-}
