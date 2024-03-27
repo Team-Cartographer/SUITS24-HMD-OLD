@@ -118,74 +118,75 @@ public class WarningSystemScript : MonoBehaviour
 
     IEnumerator UpdateLMCCTodo()
     {
-    
-    using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGetTodo))
-    {
-        yield return webRequest.SendWebRequest();
 
-        if (webRequest.result != UnityWebRequest.Result.Success) { Debug.LogError("Error: " + webRequest.error); }
-        else
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGetTodo))
         {
-            LMCCTodoItems lmccTodo = JsonConvert.DeserializeObject<LMCCTodoItems>(webRequest.downloadHandler.text);
+            yield return webRequest.SendWebRequest();
 
-
-            bool allDone = true;
-            if (lmccTodo.todoItems != null)
-            {
-                foreach (var todoItem in lmccTodo.todoItems)
-                {
-                    if (todoItem[1] != "True")
-                    {
-                        allDone = false;
-                        break;
-                    }
-                }
-            }
-
-
-            if (lmccTodo.todoItems == null || allDone)
-            {  // This part is not optimized, but is designed to be readable
-                messageText.gameObject.SetActive(false);
-                messageDetailsText.gameObject.SetActive(false);
-            }
+            if (webRequest.result != UnityWebRequest.Result.Success) { Debug.LogError("Error: " + webRequest.error); }
             else
             {
-                messageText.gameObject.SetActive(true);
-                messageDetailsText.gameObject.SetActive(true);
+                LMCCTodoItems lmccTodo = JsonConvert.DeserializeObject<LMCCTodoItems>(webRequest.downloadHandler.text);
 
-                //look into optimizing this next part
-                foreach (var todoItem in lmccTodo.todoItems)
+
+                bool allDone = true;
+                if (lmccTodo.todoItems != null)
                 {
-                    if (todoItem[1] != "True")
+                    foreach (var todoItem in lmccTodo.todoItems)
                     {
-                        messageDetailsText.text = todoItem[0];
-                        break;
+                        if (todoItem[1] != "True")
+                        {
+                            allDone = false;
+                            break;
+                        }
                     }
                 }
-            }
 
 
-            // Larger todo screen
-            // Again, look into optimizations later
-            if (lmccTodo.todoItems != null)
-            {
-                string newTodoList = "<indent=5>\t";
-                foreach (var todoItem in todoItemsTest)
+                if (lmccTodo.todoItems == null || allDone)
+                {  // This part is not optimized, but is designed to be readable
+                    messageText.gameObject.SetActive(false);
+                    messageDetailsText.gameObject.SetActive(false);
+                }
+                else
                 {
-                    if (todoItem[1] != "True")
+                    messageText.gameObject.SetActive(true);
+                    messageDetailsText.gameObject.SetActive(true);
+
+                    //look into optimizing this next part
+                    foreach (var todoItem in lmccTodo.todoItems)
                     {
-                        newTodoList += $"-  {todoItem[0]} \n\t";
-                    }
-                    else
-                    {
-                        newTodoList += $"- <s> {todoItem[0]} </s>\n\t";
+                        if (todoItem[1] != "True")
+                        {
+                            messageDetailsText.text = todoItem[0];
+                            break;
+                        }
                     }
                 }
-                todoBody.text = newTodoList;
-            }
-            else
-            {
-                todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
+
+
+                // Larger todo screen
+                // Again, look into optimizations later
+                if (lmccTodo.todoItems != null)
+                {
+                    string newTodoList = "<indent=5>\t";
+                    foreach (var todoItem in lmccTodo.todoItems)
+                    {
+                        if (todoItem[1] != "True")
+                        {
+                            newTodoList += $"-  {todoItem[0]} \n\t";
+                        }
+                        else
+                        {
+                            newTodoList += $"- <s> {todoItem[0]} </s>\n\t";
+                        }
+                    }
+                    todoBody.text = newTodoList;
+                }
+                else
+                {
+                    todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
+                }
             }
         }
     }
