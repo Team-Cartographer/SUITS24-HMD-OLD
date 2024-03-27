@@ -176,7 +176,7 @@ public class WarningSystemScript : MonoBehaviour
                 // Again, look into optimizations later
                 if (lmccTodo.todoItems != null)
                 {
-                    string newTodoList = "<indent=5>\t";
+                    string newTodoList = "<indent=5>\n\t";
                     foreach (var todoItem in lmccTodo.todoItems)
                     {
                         if (todoItem[1] != "True")
