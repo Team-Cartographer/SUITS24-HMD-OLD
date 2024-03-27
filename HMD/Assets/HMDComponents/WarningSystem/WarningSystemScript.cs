@@ -34,16 +34,12 @@ public class WarningSystemScript : MonoBehaviour
     static readonly string lmccApiCallGetWarning = "http://" + lmccDeviceIp + ":3001/api/v0?get=warning";
     static readonly string lmccApiCallGetTodo = "http://" + lmccDeviceIp + ":3001/api/v0?get=todo";
 
-    bool warningOccurring;
-    bool updatingWarningsAndTodo;
     float timeSinceLastUpdate;
 
     // Start is called before the first frame update
     void Start()
     {
         timeSinceLastUpdate = 0.0f;
-        warningOccurring = false;
-        updatingWarningsAndTodo = false;
     }
 
     // Update is called once per frame
@@ -61,24 +57,18 @@ public class WarningSystemScript : MonoBehaviour
             }
         }
 
-        if (!updatingWarningsAndTodo)
+        timeSinceLastUpdate += Time.deltaTime;
+        //Debug.Log(timeSinceLastUpdate);
+        if (timeSinceLastUpdate >= 0.5f)
         {
-            timeSinceLastUpdate += Time.deltaTime;
-            if (timeSinceLastUpdate > 0.5f)
-            {
-                updatingWarningsAndTodo = true;
-                StartCoroutine(UpdateLMCCWarnings());
-                StartCoroutine(UpdateLMCCTodo());
-                updatingWarningsAndTodo = false;
-                timeSinceLastUpdate = 0.0f;
-            }
+            StartCoroutine(UpdateLMCCWarnings());
+            StartCoroutine(UpdateLMCCTodo());
+            timeSinceLastUpdate = 0.0f;
         }
-
     }
 
     void OpenWarning()
     {
-        warningOccurring = true;
         warningText.gameObject.SetActive(true);
         warningDetailsText.gameObject.SetActive(true);
         warningVignette.gameObject.SetActive(true);
@@ -89,12 +79,13 @@ public class WarningSystemScript : MonoBehaviour
         warningText.gameObject.SetActive(false);
         warningDetailsText.gameObject.SetActive(false);
         warningVignette.gameObject.SetActive(false);
-        warningOccurring = false;
     }
 
 
     IEnumerator UpdateLMCCWarnings()
     {
+        //Debug.Log("Updating Warnings");
+        
         using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGetWarning))
         {
             // Send request and wait for response
@@ -125,7 +116,7 @@ public class WarningSystemScript : MonoBehaviour
 
     IEnumerator UpdateLMCCTodo()
     {
-
+        //Debug.Log("Updating TODO");
         using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGetTodo))
         {
             yield return webRequest.SendWebRequest();
@@ -149,7 +140,7 @@ public class WarningSystemScript : MonoBehaviour
                     }
                 }
 
-
+                /*
                 if (lmccTodo.todoItems == null || allDone)
                 {  // This part is not optimized, but is designed to be readable
                     messageText.gameObject.SetActive(false);
@@ -170,30 +161,34 @@ public class WarningSystemScript : MonoBehaviour
                         }
                     }
                 }
-
+                */
 
                 // Larger todo screen
                 // Again, look into optimizations later
-                if (lmccTodo.todoItems != null)
+                
+                string newTodoList = "<indent=5%>";
+                foreach (var todoItem in lmccTodo.todoItems)
                 {
-                    string newTodoList = "<indent=5>\n\t";
-                    foreach (var todoItem in lmccTodo.todoItems)
+                    if (todoItem[1] != "True")
                     {
-                        if (todoItem[1] != "True")
-                        {
-                            newTodoList += $"-  {todoItem[0]} \n\t";
-                        }
-                        else
-                        {
-                            newTodoList += $"- <s> {todoItem[0]} </s>\n\t";
-                        }
+                        newTodoList += $"-  {todoItem[0]} \n";
                     }
-                    todoBody.text = newTodoList;
+                    else
+                    {
+                        newTodoList += $"- <s> {todoItem[0]} </s>\n";
+                    }
+                }
+                messageDetailsText.text = newTodoList;
+
+                if (newTodoList == "<indent=5%>")
+                {
+                    messageText.gameObject.SetActive(false);
                 }
                 else
                 {
-                    todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
+                    messageText.gameObject.SetActive(true);
                 }
+                
             }
         }
     }
