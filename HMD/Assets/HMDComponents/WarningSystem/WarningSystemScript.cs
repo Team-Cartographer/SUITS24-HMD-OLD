@@ -62,9 +62,8 @@ public class WarningSystemScript : MonoBehaviour
         if (!updatingWarningsAndTodo)
         {
             updatingWarningsAndTodo = true;
-            //StartCoroutine(UpdateLMCCWarnings());
-            //StartCoroutine(UpdateLMCCTodo());
-            UpdateLMCCTodo();
+            StartCoroutine(UpdateLMCCWarnings());
+            StartCoroutine(UpdateLMCCTodo());
             updatingWarningsAndTodo = false;
         }
 
@@ -117,34 +116,9 @@ public class WarningSystemScript : MonoBehaviour
         }
     }
 
-    void UpdateLMCCTodo()  // Change back to IEnumerator
+    IEnumerator UpdateLMCCTodo()
     {
-        string[][] todoItemsTest = new string[][] {
-            new string[] { "test1", "False" }
-        };
-
-        if (todoItemsTest != null)
-        {
-            string newTodoList = "\t";
-            foreach (var todoItem in todoItemsTest)
-            {
-                if (todoItem[1] != "True")
-                {
-                    newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n\t";
-                }
-                else
-                {
-                    newTodoList += $"-<indent=5%><s>{todoItem[0]}</s><indent=0%>\n\t";
-                }
-            }
-            todoBody.text = newTodoList;
-        }
-        else
-        {
-            todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
-        }
-    }
-    /*
+    
     using (UnityWebRequest webRequest = UnityWebRequest.Get(lmccApiCallGetTodo))
     {
         yield return webRequest.SendWebRequest();
@@ -195,16 +169,16 @@ public class WarningSystemScript : MonoBehaviour
             // Again, look into optimizations later
             if (lmccTodo.todoItems != null)
             {
-                string newTodoList = "\t";
-                foreach (var todoItem in lmccTodo.todoItems)
+                string newTodoList = "<indent=5>\t";
+                foreach (var todoItem in todoItemsTest)
                 {
                     if (todoItem[1] != "True")
                     {
-                        newTodoList += "-<indent=5%>" + todoItem[0] + "<indent=0%>\n\t";
+                        newTodoList += $"-  {todoItem[0]} \n\t";
                     }
                     else
                     {
-                        newTodoList += "- <s>" + todoItem[0] + "</s><indent=0%>\n\t";
+                        newTodoList += $"- <s> {todoItem[0]} </s>\n\t";
                     }
                 }
                 todoBody.text = newTodoList;
@@ -213,10 +187,6 @@ public class WarningSystemScript : MonoBehaviour
             {
                 todoBody.text = "\n\tThere are no tasks on your task list. Check with LMCC for a new task!\n\t";
             }
-
-
         }
     }
-    */
-
 }
