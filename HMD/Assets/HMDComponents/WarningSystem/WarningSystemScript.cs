@@ -140,28 +140,6 @@ public class WarningSystemScript : MonoBehaviour
                     }
                 }
 
-                /*
-                if (lmccTodo.todoItems == null || allDone)
-                {  // This part is not optimized, but is designed to be readable
-                    messageText.gameObject.SetActive(false);
-                    messageDetailsText.gameObject.SetActive(false);
-                }
-                else
-                {
-                    messageText.gameObject.SetActive(true);
-                    messageDetailsText.gameObject.SetActive(true);
-
-                    //look into optimizing this next part
-                    foreach (var todoItem in lmccTodo.todoItems)
-                    {
-                        if (todoItem[1] != "True")
-                        {
-                            messageDetailsText.text = todoItem[0];
-                            break;
-                        }
-                    }
-                }
-                */
 
                 // Larger todo screen
                 // Again, look into optimizations later
