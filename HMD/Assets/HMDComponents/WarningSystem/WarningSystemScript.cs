@@ -30,16 +30,18 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text todoBody;
     public Canvas todoCanvas;
 
-    [SerializeField] static readonly string lmccDeviceIp = "YOUR_IP_HERE";
+    [SerializeField] static readonly string lmccDeviceIp = "192.168.4.36";
     static readonly string lmccApiCallGetWarning = "http://" + lmccDeviceIp + ":3001/api/v0?get=warning";
     static readonly string lmccApiCallGetTodo = "http://" + lmccDeviceIp + ":3001/api/v0?get=todo";
 
     bool warningOccurring;
     bool updatingWarningsAndTodo;
+    float timeSinceLastUpdate;
 
     // Start is called before the first frame update
     void Start()
     {
+        timeSinceLastUpdate = 0.0f;
         warningOccurring = false;
         updatingWarningsAndTodo = false;
     }
@@ -61,10 +63,15 @@ public class WarningSystemScript : MonoBehaviour
 
         if (!updatingWarningsAndTodo)
         {
-            updatingWarningsAndTodo = true;
-            StartCoroutine(UpdateLMCCWarnings());
-            StartCoroutine(UpdateLMCCTodo());
-            updatingWarningsAndTodo = false;
+            timeSinceLastUpdate += Time.deltaTime;
+            if (timeSinceLastUpdate > 0.5f)
+            {
+                updatingWarningsAndTodo = true;
+                StartCoroutine(UpdateLMCCWarnings());
+                StartCoroutine(UpdateLMCCTodo());
+                updatingWarningsAndTodo = false;
+                timeSinceLastUpdate = 0.0f;
+            }
         }
 
     }
