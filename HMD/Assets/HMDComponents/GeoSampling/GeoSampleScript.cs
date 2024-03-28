@@ -31,7 +31,9 @@ public class GeoSampleScript : MonoBehaviour
             if (id1 != 0)
             {
                 text += "Eva1\n";
-                
+                text += $"id: {id1}\n";
+
+
                 foreach (var pair in jo["spec"]["eva1"]["data"].ToObject<JObject>())
                 {
                     text += $"{pair.Key}: {pair.Value}\n";
@@ -42,6 +44,8 @@ public class GeoSampleScript : MonoBehaviour
             if (id2 != 0)
             {
                 text += "Eva2\n";
+                text += $"id: {id2}\n";
+
 
                 foreach (var pair in jo["spec"]["eva2"]["data"].ToObject<JObject>())
                 {
