@@ -113,7 +113,7 @@ public class WarningSystemScript : MonoBehaviour
             {
                 LMCCTodoItems lmccTodo = JsonConvert.DeserializeObject<LMCCTodoItems>(webRequest.downloadHandler.text);
 
-
+                /*
                 bool allDone = true;
                 if (lmccTodo.todoItems != null)
                 {
@@ -125,7 +125,7 @@ public class WarningSystemScript : MonoBehaviour
                             break;
                         }
                     }
-                }
+                }*/
 
 
                 // Larger todo screen
