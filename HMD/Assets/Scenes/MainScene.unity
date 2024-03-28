@@ -935,7 +935,7 @@ Canvas:
   m_GameObject: {fileID: 246182317}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3343,7 +3343,7 @@ MonoBehaviour:
   m_Target: {fileID: 0}
   m_TargetOffset: {x: -0.1, y: 1.55, z: 1}
   m_FollowInLocalSpace: 1
-  m_ApplyTargetInLocalSpace: 0
+  m_ApplyTargetInLocalSpace: 1
   m_MovementSpeed: 20
   m_MovementSpeedVariancePercentage: 0.1
   m_SnapOnEnable: 1
@@ -3930,7 +3930,7 @@ Canvas:
   m_GameObject: {fileID: 1344467283}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
