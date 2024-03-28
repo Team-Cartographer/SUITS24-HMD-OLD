@@ -27,8 +27,6 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text messageText;
     public TMP_Text messageDetailsText;
     public RawImage warningVignette;
-    public TMP_Text todoBody;
-    public Canvas todoCanvas;
 
     [SerializeField] static readonly string lmccDeviceIp = "192.168.4.36";
     static readonly string lmccApiCallGetWarning = "http://" + lmccDeviceIp + ":3001/api/v0?get=warning";
@@ -45,17 +43,6 @@ public class WarningSystemScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            if (todoCanvas.gameObject.activeSelf)
-            {
-                todoCanvas.gameObject.SetActive(false);
-            }
-            else
-            {
-                todoCanvas.gameObject.SetActive(true);
-            }
-        }
 
         timeSinceLastUpdate += Time.deltaTime;
         //Debug.Log(timeSinceLastUpdate);
