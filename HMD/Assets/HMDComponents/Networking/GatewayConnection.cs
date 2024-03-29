@@ -306,7 +306,7 @@ public class GatewayConnection : MonoBehaviour
 
     IEnumerator GetTELEMETRYState()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/teams/" + this.team_number + "/TELEMETRY.json"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/telemetry"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
