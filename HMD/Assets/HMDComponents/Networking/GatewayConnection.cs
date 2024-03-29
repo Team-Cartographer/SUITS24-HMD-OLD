@@ -8,9 +8,9 @@ public class GatewayConnection : MonoBehaviour
     string host;
     string port;
     string url;
-    int    team_number;
-    bool   connected;
-    float  time_since_last_update;
+    int team_number;
+    bool connected;
+    float time_since_last_update;
 
     // Database Jsons
     bool UIAUpdated;
@@ -40,7 +40,7 @@ public class GatewayConnection : MonoBehaviour
     bool TODOUpdated;
     string TODOITEMSJsonString;
     bool WARNINGUpdated;
-    string WARNINGJsonString; 
+    string WARNINGJsonString;
 
     // Connect to TSSc with a specific team number
     public void ConnectToHost(string host, int team_number)
@@ -75,7 +75,7 @@ public class GatewayConnection : MonoBehaviour
     // This Function is called when the program begins
     void Start()
     {
-        
+
     }
 
     // This Function is called each render frame
@@ -90,7 +90,7 @@ public class GatewayConnection : MonoBehaviour
             {
                 // Pull TSSc Updates
                 StartCoroutine(GetUIAState());
-                StartCoroutine(GetDCUState()); 
+                StartCoroutine(GetDCUState());
                 StartCoroutine(GetROVERState());
                 StartCoroutine(GetSPECState());
                 StartCoroutine(GetTELEMETRYState());
@@ -550,7 +550,7 @@ public class GatewayConnection : MonoBehaviour
 
     public bool isTODOITEMSUpdated()
     {
-        return TODOUpdated; 
+        return TODOUpdated;
     }
 
 

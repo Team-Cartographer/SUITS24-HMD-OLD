@@ -15,7 +15,7 @@ public class WarningSystemScript : MonoBehaviour
     public TMP_Text messageDetailsText;
     public RawImage warningVignette;
 
-    public ConnectionHandler connection; 
+    public ConnectionHandler connection;
 
     // Start is called before the first frame update
     void Start()

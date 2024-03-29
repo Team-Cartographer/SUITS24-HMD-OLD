@@ -37,7 +37,7 @@ public class GeoSampleScript : MonoBehaviour
                 foreach (var pair in jo["spec"]["eva1"]["data"].ToObject<JObject>())
                 {
                     text += $"{pair.Key}: {pair.Value}\n";
-                    Debug.Log(pair.Key);
+                    //Debug.Log(pair.Key);
                 }
                 //geoText = $"eva1\n{}";
             }
@@ -50,7 +50,7 @@ public class GeoSampleScript : MonoBehaviour
                 foreach (var pair in jo["spec"]["eva2"]["data"].ToObject<JObject>())
                 {
                     text += $"{pair.Key}: {pair.Value}\n";
-                    Debug.Log(pair.Key);
+                    //Debug.Log(pair.Key);
                 }
                 //geoText = $"eva1\n{}";
             }
