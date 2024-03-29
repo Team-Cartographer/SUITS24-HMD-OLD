@@ -26,7 +26,6 @@ public class GeoSampleScript : MonoBehaviour
 
             float id1 = jo["spec"]["eva1"]["id"].ToObject<float>();
             float id2 = jo["spec"]["eva2"]["id"].ToObject<float>();
-            Debug.Log(id1);
             string text = "";
             if (id1 != 0)
             {
