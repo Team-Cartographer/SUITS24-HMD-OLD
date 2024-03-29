@@ -36,6 +36,12 @@ public class GatewayConnection : MonoBehaviour
     bool TSSINFOUpdated;
     string TSSINFOJsonString;
 
+    ////// API ROUTES
+    bool TODOUpdated;
+    string TODOITEMSJsonString;
+    bool WARNINGUpdated;
+    string WARNINGJsonString; 
+
     // Connect to TSSc with a specific team number
     public void ConnectToHost(string host, int team_number)
     {
@@ -95,6 +101,9 @@ public class GatewayConnection : MonoBehaviour
                 StartCoroutine(GetROCKDATAState());
                 StartCoroutine(GetEVAINFOState());
                 StartCoroutine(GetTSSINFOState());
+
+                StartCoroutine(GetTODOState());
+                StartCoroutine(GetWARNINGState());
 
                 time_since_last_update = 0.0f;
             }
@@ -510,5 +519,68 @@ public class GatewayConnection : MonoBehaviour
     public bool isTSSINFOUpdated()
     {
         return TSSINFOUpdated;
+    }
+
+    ///////////////////////////////////////////// API ROUTES
+
+    IEnumerator GetTODOState()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/api/v0?get=todo"))
+        {
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    if (this.TODOITEMSJsonString != webRequest.downloadHandler.text)
+                    {
+                        this.TODOUpdated = true;
+                        this.TODOITEMSJsonString = webRequest.downloadHandler.text;
+                    }
+                    break;
+            }
+        }
+    }
+
+    public string GetTODOITEMSJsonString()
+    {
+        TODOUpdated = false;
+        return this.TODOITEMSJsonString;
+    }
+
+    public bool isTODOITEMSUpdated()
+    {
+        return TODOUpdated; 
+    }
+
+
+    IEnumerator GetWARNINGState()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/api/v0?get=warning"))
+        {
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    if (this.WARNINGJsonString != webRequest.downloadHandler.text)
+                    {
+                        this.WARNINGUpdated = true;
+                        this.WARNINGJsonString = webRequest.downloadHandler.text;
+                    }
+                    break;
+            }
+        }
+    }
+
+    public string GetWARNINGJsonString()
+    {
+        WARNINGUpdated = false;
+        return this.WARNINGJsonString;
+    }
+
+    public bool isWARNINGUpdated()
+    {
+        return WARNINGUpdated;
     }
 }
