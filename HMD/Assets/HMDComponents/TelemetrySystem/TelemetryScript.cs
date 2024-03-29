@@ -50,7 +50,7 @@ public class TelemetryScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        telemetryCanvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

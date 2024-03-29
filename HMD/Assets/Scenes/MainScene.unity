@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 4639551}
   - component: {fileID: 4639550}
   - component: {fileID: 4639549}
+  - component: {fileID: 4639552}
   m_Layer: 0
   m_Name: ActiveTimeCanvas
   m_TagString: Untagged
@@ -149,18 +150,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4639547}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.7270894}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0.046458278, y: 0.25908947, z: 0.012477886, w: 0.9646547}
+  m_LocalPosition: {x: 0, y: 0, z: -6.2772093}
+  m_LocalScale: {x: 0.000175, y: 0.00017, z: 0.00017}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 119620462}
   m_Father: {fileID: 1315440364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 112.16531, y: 79.33206}
-  m_SizeDelta: {x: 1111, y: 625}
+  m_AnchoredPosition: {x: -443.07318, y: -231.5177}
+  m_SizeDelta: {x: 800, y: 440.32697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4639549
 MonoBehaviour:
@@ -225,6 +226,33 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &4639552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 0}
+  m_TargetOffset: {x: 0.13, y: 0.08, z: 0.5}
+  m_FollowInLocalSpace: 0
+  m_ApplyTargetInLocalSpace: 0
+  m_MovementSpeed: 10000
+  m_MovementSpeedVariancePercentage: 0
+  m_SnapOnEnable: 1
+  m_PositionFollowMode: 1
+  m_MinDistanceAllowed: 0
+  m_MaxDistanceAllowed: 0
+  m_TimeUntilThresholdReachesMaxDistance: 0
+  m_RotationFollowMode: 1
+  m_MinAngleAllowed: 0
+  m_MaxAngleAllowed: 0
+  m_TimeUntilThresholdReachesMaxAngle: 0
 --- !u!1 &60165040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2928,6 +2956,7 @@ GameObject:
   - component: {fileID: 680689947}
   - component: {fileID: 680689949}
   - component: {fileID: 680689948}
+  - component: {fileID: 680689950}
   m_Layer: 0
   m_Name: TelemetryCanvas
   m_TagString: Untagged
@@ -3003,6 +3032,33 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &680689950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680689946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 0}
+  m_TargetOffset: {x: 0, y: 0, z: 0.41}
+  m_FollowInLocalSpace: 0
+  m_ApplyTargetInLocalSpace: 0
+  m_MovementSpeed: 10000
+  m_MovementSpeedVariancePercentage: 0
+  m_SnapOnEnable: 1
+  m_PositionFollowMode: 1
+  m_MinDistanceAllowed: 0
+  m_MaxDistanceAllowed: 0
+  m_TimeUntilThresholdReachesMaxDistance: 0
+  m_RotationFollowMode: 1
+  m_MinAngleAllowed: 0
+  m_MaxAngleAllowed: 0
+  m_TimeUntilThresholdReachesMaxAngle: 0
 --- !u!1 &700770486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,8 +4280,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1183467020}
-  - component: {fileID: 1183467021}
   - component: {fileID: 1183467018}
+  - component: {fileID: 1183467019}
   m_Layer: 0
   m_Name: NetworkingObject
   m_TagString: Untagged
@@ -4757,7 +4813,7 @@ RectTransform:
   m_GameObject: {fileID: 1264754108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1.4999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 246182318}
@@ -4985,7 +5041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 0}
-  m_TargetOffset: {x: 0, y: 0.0055, z: 0.28}
+  m_TargetOffset: {x: 0, y: 0.018, z: 0.28}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
   m_MovementSpeed: 10000
@@ -6518,3 +6574,4 @@ SceneRoots:
   - {fileID: 1876235923}
   - {fileID: 2008639532}
   - {fileID: 1777340099}
+  - {fileID: 1315440364}
