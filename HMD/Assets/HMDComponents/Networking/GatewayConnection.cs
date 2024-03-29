@@ -8,7 +8,6 @@ public class GatewayConnection : MonoBehaviour
     string host;
     string port;
     string url;
-    int team_number;
     bool connected;
     float time_since_last_update;
 
@@ -42,24 +41,12 @@ public class GatewayConnection : MonoBehaviour
     bool WARNINGUpdated;
     string WARNINGJsonString;
 
-    // Connect to TSSc with a specific team number
-    public void ConnectToHost(string host, int team_number)
-    {
-        this.host = host;
-        this.port = "3001";
-        this.team_number = team_number;
-        this.url = "http://" + this.host + ":" + this.port;
-        Debug.Log(this.url);
 
-        // Test Connection
-        StartCoroutine(GetRequest(this.url));
-    }
     // Connect with port
-    public void ConnectToHost(string host, int team_number, int port)
+    public void ConnectToHost(string host, int port)
     {
         this.host = host;
         this.port = port.ToString();
-        this.team_number = team_number;
         this.url = "http://" + this.host + ":" + this.port;
         Debug.Log(this.url);
 
@@ -75,7 +62,7 @@ public class GatewayConnection : MonoBehaviour
     // This Function is called when the program begins
     void Start()
     {
-
+        time_since_last_update = 0.0f; 
     }
 
     // This Function is called each render frame
@@ -86,7 +73,7 @@ public class GatewayConnection : MonoBehaviour
         {
             // Each Second
             time_since_last_update += Time.deltaTime;
-            if (time_since_last_update > 1.0f)
+            if (time_since_last_update >= 1.0f)
             {
                 // Pull TSSc Updates
                 StartCoroutine(GetUIAState());

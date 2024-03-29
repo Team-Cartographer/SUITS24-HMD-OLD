@@ -9,7 +9,7 @@ public class ConnectionHandler : MonoBehaviour
     public GatewayConnection GatewayConnection;
     void Start()
     {
-        GatewayConnection.ConnectToHost("192.168.4.36", 2, 3001);
+        GatewayConnection.ConnectToHost("192.168.4.36", 3001);
     }
 
     public GatewayConnection GetConnection()
