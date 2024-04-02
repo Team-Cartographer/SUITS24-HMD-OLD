@@ -31,13 +31,17 @@ public class PlayerController : MonoBehaviour
             PlacePin(); // place pin with keyboard for testing purposes
         }
     }
-
-    public void PlacePin()
+    public void PlacePin(float x, float y, float z)
     {
         // summons a pin at the headset user's position, and adds pin to list of pins present in the current run
         GameObject newPin = Instantiate(worldPin,
-                new Vector3(playerPosition.x, playerPosition.y, playerPosition.z),
+                new Vector3(x, y, z),
                 Quaternion.identity);
         allPins.Add(newPin);
+    }
+    public void PlacePin()
+    {
+        // summons a pin at the headset user's position, and adds pin to list of pins present in the current run
+        PlacePin(playerPosition.x, playerPosition.y, playerPosition.z);
     }
 }

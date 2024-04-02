@@ -242,9 +242,9 @@ MonoBehaviour:
   m_TargetOffset: {x: 0.1, y: 0.06, z: 0.5}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
-  m_MovementSpeed: 10000
-  m_MovementSpeedVariancePercentage: 0
-  m_SnapOnEnable: 1
+  m_MovementSpeed: 100
+  m_MovementSpeedVariancePercentage: 0.9
+  m_SnapOnEnable: 0
   m_PositionFollowMode: 1
   m_MinDistanceAllowed: 0
   m_MaxDistanceAllowed: 0
@@ -1230,9 +1230,9 @@ MonoBehaviour:
   m_TargetOffset: {x: 0, y: 0, z: 0.5}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
-  m_MovementSpeed: 10000
-  m_MovementSpeedVariancePercentage: 0
-  m_SnapOnEnable: 1
+  m_MovementSpeed: 100
+  m_MovementSpeedVariancePercentage: 0.9
+  m_SnapOnEnable: 0
   m_PositionFollowMode: 1
   m_MinDistanceAllowed: 0
   m_MaxDistanceAllowed: 0
@@ -3048,9 +3048,9 @@ MonoBehaviour:
   m_TargetOffset: {x: 0, y: 0, z: 0.41}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
-  m_MovementSpeed: 10000
-  m_MovementSpeedVariancePercentage: 0
-  m_SnapOnEnable: 1
+  m_MovementSpeed: 100
+  m_MovementSpeedVariancePercentage: 0.9
+  m_SnapOnEnable: 0
   m_PositionFollowMode: 1
   m_MinDistanceAllowed: 0
   m_MaxDistanceAllowed: 0
@@ -4626,9 +4626,9 @@ MonoBehaviour:
   m_TargetOffset: {x: 0, y: -0.019, z: 0.5}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
-  m_MovementSpeed: 10000
-  m_MovementSpeedVariancePercentage: 0
-  m_SnapOnEnable: 1
+  m_MovementSpeed: 100
+  m_MovementSpeedVariancePercentage: 0.9
+  m_SnapOnEnable: 0
   m_PositionFollowMode: 1
   m_MinDistanceAllowed: 0
   m_MaxDistanceAllowed: 0
@@ -4924,6 +4924,7 @@ GameObject:
   - component: {fileID: 1344467286}
   - component: {fileID: 1344467285}
   - component: {fileID: 1344467289}
+  - component: {fileID: 1344467290}
   m_Layer: 5
   m_Name: CompassCanvas
   m_TagString: Untagged
@@ -5038,6 +5039,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 0}
+  m_TargetOffset: {x: 0, y: 0.0105, z: 0.28}
+  m_FollowInLocalSpace: 0
+  m_ApplyTargetInLocalSpace: 0
+  m_MovementSpeed: 100
+  m_MovementSpeedVariancePercentage: 0.9
+  m_SnapOnEnable: 0
+  m_PositionFollowMode: 1
+  m_MinDistanceAllowed: 0
+  m_MaxDistanceAllowed: 0
+  m_TimeUntilThresholdReachesMaxDistance: 0
+  m_RotationFollowMode: 1
+  m_MinAngleAllowed: 0
+  m_MaxAngleAllowed: 0
+  m_TimeUntilThresholdReachesMaxAngle: 0
+--- !u!114 &1344467290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344467283}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91e420d1edabd947bdc1653bdc5e2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 0}
