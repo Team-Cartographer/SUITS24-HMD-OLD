@@ -43,3 +43,5 @@ sysinfo.txt
 
 HMD/.vsconfig
 **/*.log
+HMD/Assets/HMDComponents/MinimapSystem/Textures/Minimap/MinimapRender.renderTexture
+HMD/Assets/HMDComponents/MinimapSystem/Textures/Minimap/WorldMapRender.renderTexture

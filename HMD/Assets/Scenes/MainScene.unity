@@ -2005,6 +2005,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldPin: {fileID: 3627275342200852551, guid: fb56f31fb811b884fb827152d75dca8f, type: 3}
   allPins: []
+--- !u!4 &374539557 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2351505566771328526, guid: 4d7e2f87fefe0ba468719b15288b46e7, type: 3}
+  m_PrefabInstance: {fileID: 374539549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &404569396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,14 +2719,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 0}
-  m_TargetOffset: {x: 0, y: 0, z: 0.5}
+  m_TargetOffset: {x: 0, y: 0, z: 1.5}
   m_FollowInLocalSpace: 0
   m_ApplyTargetInLocalSpace: 0
   m_MovementSpeed: 6
   m_MovementSpeedVariancePercentage: 0.25
   m_SnapOnEnable: 1
   m_PositionFollowMode: 1
-  m_MinDistanceAllowed: 0.01
+  m_MinDistanceAllowed: 0.06
   m_MaxDistanceAllowed: 0.02
   m_TimeUntilThresholdReachesMaxDistance: 1
   m_RotationFollowMode: 2
@@ -2740,6 +2745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf871a0ca6ef474ea1369b792a9b58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1567654915}
 --- !u!1 &628870397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,15 +3843,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3705378105823492765, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3333.3335
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3705378105823492765, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3333.3335
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3705378105823492765, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3333.3335
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3705378105823492765, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3894,6 +3900,10 @@ PrefabInstance:
     - target: {fileID: 3705378105823492765, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705378105823492765, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7746750332524202746, guid: b85e005d231192249b7077b40a4d4e45, type: 3}
       propertyPath: m_Color.a
@@ -4104,10 +4114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2d7d89889b4d94fa1f8d6fe49788e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 0}
-  m_TargetOffset: {x: -0.1, y: 1.55, z: 1}
+  m_Target: {fileID: 374539557}
+  m_TargetOffset: {x: -0.25, y: -0.1, z: 1.2}
   m_FollowInLocalSpace: 1
-  m_ApplyTargetInLocalSpace: 1
+  m_ApplyTargetInLocalSpace: 0
   m_MovementSpeed: 20
   m_MovementSpeedVariancePercentage: 0.1
   m_SnapOnEnable: 1
@@ -4129,7 +4139,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.12940949, y: -0.12940958, z: 0.017037088, w: 0.98296297}
   m_LocalPosition: {x: -0.1, y: 1.55, z: 1}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.0005}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.0005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1475011836}
@@ -4597,7 +4607,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257562071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -453.8937}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.00029999999, y: 0.00029999999, z: 0.00029999999}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4607,7 +4617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.673604, y: 1.46259}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 440.32697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1257562073
