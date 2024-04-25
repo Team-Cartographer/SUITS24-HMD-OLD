@@ -1,63 +1,39 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class GatewayConnection : MonoBehaviour
 {
-    // Connection
-    string host;
-    string port;
-    string url;
-    int    team_number;
-    bool   connected;
-    float  time_since_last_update;
+    private string host;
+    private string port;
+    private string url;
+    private bool connected;
+    private float timeSinceLastUpdate = 0f;
+    private float updateInterval = 1.5f; // 1 second
 
-    // Database Jsons
-    bool UIAUpdated;
-    string UIAJsonString;
-    bool DCUUpdated;
-    string DCUJsonString;
-    bool ROVERUpdated;
-    string ROVERJsonString;
-    bool SPECUpdated;
-    string SPECJsonString;
-    bool TELEMETRYUpdated;
-    string TELEMETRYJsonString;
-    bool COMMUpdated;
-    string COMMJsonString;
-    bool IMUUpdated;
-    string IMUJsonString;
-    bool ERRORUpdated;
-    string ERRORJsonString;
-    bool ROCKDATAUpdated;
-    string ROCKDATAJsonString;
-    bool EVAINFOUpdated;
-    string EVAINFOJsonString;
-    bool TSSINFOUpdated;
-    string TSSINFOJsonString;
-
-    // Connect to TSSc with a specific team number
-    public void ConnectToHost(string host, int team_number)
+    private Dictionary<string, bool> isUpdated = new Dictionary<string, bool>
     {
-        this.host = host;
-        this.port = "3001";
-        this.team_number = team_number;
-        this.url = "http://" + this.host + ":" + this.port;
-        Debug.Log(this.url);
+        { "UIA", false }, { "DCU", false }, { "ROVER", false }, { "SPEC", false },
+        { "TELEMETRY", false }, { "COMM", false }, { "IMU", false }, { "ERROR", false },
+        { "ROCKDATA", false }, { "EVAINFO", false }, { "TSSINFO", false },
+        { "TODO", false }, { "WARNING", false }
+    };
 
-        // Test Connection
-        StartCoroutine(GetRequest(this.url));
-    }
-    // Connect with port
-    public void ConnectToHost(string host, int team_number, int port)
+    private Dictionary<string, string> jsonStrings = new Dictionary<string, string>
+    {
+        { "UIA", "" }, { "DCU", "" }, { "ROVER", "" }, { "SPEC", "" },
+        { "TELEMETRY", "" }, { "COMM", "" }, { "IMU", "" }, { "ERROR", "" },
+        { "ROCKDATA", "" }, { "EVAINFO", "" }, { "TSSINFO", "" },
+        { "TODO", "" }, { "WARNING", "" }
+    };
+
+    public void ConnectToHost(string host, int port)
     {
         this.host = host;
         this.port = port.ToString();
-        this.team_number = team_number;
-        this.url = "http://" + this.host + ":" + this.port;
+        this.url = $"http://{this.host}:{this.port}";
         Debug.Log(this.url);
-
-        // Test Connection
         StartCoroutine(GetRequest(this.url));
     }
 
@@ -66,42 +42,37 @@ public class GatewayConnection : MonoBehaviour
         this.connected = false;
     }
 
-    // This Function is called when the program begins
-    void Start()
+    private void Update()
     {
-        
-    }
-
-    // This Function is called each render frame
-    void Update()
-    {
-        // If you are connected to TSSc
         if (this.connected)
         {
-            // Each Second
-            time_since_last_update += Time.deltaTime;
-            if (time_since_last_update > 1.0f)
+            timeSinceLastUpdate += Time.deltaTime;
+            if (timeSinceLastUpdate >= updateInterval)
             {
-                // Pull TSSc Updates
-                StartCoroutine(GetUIAState());
-                StartCoroutine(GetDCUState()); 
-                StartCoroutine(GetROVERState());
-                StartCoroutine(GetSPECState());
-                StartCoroutine(GetTELEMETRYState());
-                StartCoroutine(GetCOMMState());
-                StartCoroutine(GetIMUState());
-
-                StartCoroutine(GetERRORState());
-                StartCoroutine(GetROCKDATAState());
-                StartCoroutine(GetEVAINFOState());
-                StartCoroutine(GetTSSINFOState());
-
-                time_since_last_update = 0.0f;
+                UpdateAllStates();
+                timeSinceLastUpdate = 0f;
             }
         }
     }
 
-    IEnumerator GetRequest(string uri)
+    private void UpdateAllStates()
+    {
+        StartCoroutine(GetUIAState());
+        StartCoroutine(GetDCUState());
+        StartCoroutine(GetROVERState());
+        StartCoroutine(GetSPECState());
+        StartCoroutine(GetTELEMETRYState());
+        StartCoroutine(GetCOMMState());
+        StartCoroutine(GetIMUState());
+        StartCoroutine(GetERRORState());
+        StartCoroutine(GetROCKDATAState());
+        StartCoroutine(GetEVAINFOState());
+        StartCoroutine(GetTSSINFOState());
+        StartCoroutine(GetTODOState());
+        StartCoroutine(GetWARNINGState());
+    }
+
+    private IEnumerator GetRequest(string uri)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
@@ -113,402 +84,198 @@ public class GatewayConnection : MonoBehaviour
             {
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                    Debug.LogError($"{pages[page]}: Error: {webRequest.error}");
                     break;
                 case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                    Debug.LogError($"{pages[page]}: HTTP Error: {webRequest.error}");
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    Debug.Log($"{pages[page]}:\nReceived: {webRequest.downloadHandler.text}");
                     this.connected = true;
                     break;
             }
-
         }
     }
 
-    ///////////////////////////////////////////// UIA
+    #region State Getters
+    private IEnumerator GetUIAState() { yield return GetState("UIA", "/mission/uia"); }
+    private IEnumerator GetDCUState() { yield return GetState("DCU", "/mission/dcu"); }
+    private IEnumerator GetROVERState() { yield return GetState("ROVER", "/mission/rover"); }
+    private IEnumerator GetSPECState() { yield return GetState("SPEC", "/mission/spec"); }
+    private IEnumerator GetTELEMETRYState() { yield return GetState("TELEMETRY", "/tss/telemetry"); }
+    private IEnumerator GetCOMMState() { yield return GetState("COMM", "/mission/comm"); }
+    private IEnumerator GetIMUState() { yield return GetState("IMU", "/mission/imu"); }
+    private IEnumerator GetERRORState() { yield return GetState("ERROR", "/mission/error"); }
+    private IEnumerator GetROCKDATAState() { yield return GetState("ROCKDATA", "/tss/rockdata"); }
+    private IEnumerator GetEVAINFOState() { yield return GetState("EVAINFO", "/tss/eva_info"); }
+    private IEnumerator GetTSSINFOState() { yield return GetState("TSSINFO", "/tss/info"); }
+    private IEnumerator GetTODOState() { yield return GetState("TODO", "/todo"); }
+    private IEnumerator GetWARNINGState() { yield return GetState("WARNING", "/warning"); }
+    #endregion
 
-    IEnumerator GetUIAState()
+    private IEnumerator GetState(string stateName, string endpoint)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/uia"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + endpoint))
         {
-            // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)
             {
                 case UnityWebRequest.Result.Success:
-                    if (this.UIAJsonString != webRequest.downloadHandler.text)
+                    if (this.jsonStrings[stateName] != webRequest.downloadHandler.text)
                     {
-                        this.UIAUpdated = true;
-                        this.UIAJsonString = webRequest.downloadHandler.text;
+                        this.isUpdated[stateName] = true;
+                        this.jsonStrings[stateName] = webRequest.downloadHandler.text;
                     }
                     break;
             }
-
         }
+
+        yield return new WaitForSeconds(updateInterval); 
+    }
+
+    public string GetJsonString(string stateName)
+    {
+        this.isUpdated[stateName] = false;
+        return this.jsonStrings[stateName];
+    }
+
+    public bool IsStateUpdated(string stateName)
+    {
+        return this.isUpdated[stateName];
+    }
+
+
+    public string GetDCUJsonString()
+    {
+        return this.GetJsonString("DCU");
     }
 
     public string GetUIAJsonString()
     {
-        UIAUpdated = false;
-        return this.UIAJsonString;
-    }
-
-    public bool isUIAUpdated()
-    {
-        return UIAUpdated;
-    }
-
-    ///////////////////////////////////////////// DCU
-
-    IEnumerator GetDCUState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/dcu"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.DCUJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.DCUUpdated = true;
-                        this.DCUJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.DCUJsonString);
-                    }
-                    break;
-            }
-
-        }
-    }
-
-    public string GetDCUJsonString()
-    {
-        DCUUpdated = false;
-        return this.DCUJsonString;
-    }
-
-    public bool isDCUUpdated()
-    {
-        return DCUUpdated;
-    }
-
-    ///////////////////////////////////////////// ROVER
-
-    IEnumerator GetROVERState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/rover"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.ROVERJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.ROVERUpdated = true;
-                        this.ROVERJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.ROVERJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("UIA");
     }
 
     public string GetROVERJsonString()
     {
-        ROVERUpdated = false;
-        return this.ROVERJsonString;
-    }
-
-    public bool isROVERUpdated()
-    {
-        return ROVERUpdated;
-    }
-
-    ///////////////////////////////////////////// SPEC
-
-    IEnumerator GetSPECState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/spec"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.SPECJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.SPECUpdated = true;
-                        this.SPECJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.SPECJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("ROVER");
     }
 
     public string GetSPECJsonString()
     {
-        SPECUpdated = false;
-        return this.SPECJsonString;
-    }
-
-    public bool isSPECUpdated()
-    {
-        return SPECUpdated;
-    }
-
-
-    ///////////////////////////////////////////// ERROR
-    IEnumerator GetERRORState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/error"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.ERRORJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.ERRORUpdated = true;
-                        this.ERRORJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.ERRORJsonString);
-                    }
-                    break;
-            }
-
-        }
-    }
-
-    public string GetERRORJsonString()
-    {
-        ERRORUpdated = false;
-        return this.ERRORJsonString;
-    }
-
-    public bool isERRORUpdated()
-    {
-        return ERRORUpdated;
-    }
-
-
-    ///////////////////////////////////////////// TELEMETRY
-
-    IEnumerator GetTELEMETRYState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/json_data/teams/" + this.team_number + "/TELEMETRY.json"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.TELEMETRYJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.TELEMETRYUpdated = true;
-                        this.TELEMETRYJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.TELEMETRYJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("SPEC");
     }
 
     public string GetTELEMETRYJsonString()
     {
-        TELEMETRYUpdated = false;
-        return this.TELEMETRYJsonString;
-    }
-
-    public bool isTELEMETRYUpdated()
-    {
-        return TELEMETRYUpdated;
-    }
-
-    ///////////////////////////////////////////// COMM
-
-    IEnumerator GetCOMMState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/comm"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.COMMJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.COMMUpdated = true;
-                        this.COMMJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.COMMJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("TELEMETRY");
     }
 
     public string GetCOMMJsonString()
     {
-        COMMUpdated = false;
-        return this.COMMJsonString;
-    }
-
-    public bool isCOMMUpdated()
-    {
-        return COMMUpdated;
-    }
-
-    ///////////////////////////////////////////// IMU
-
-    IEnumerator GetIMUState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/mission/imu"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.IMUJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.IMUUpdated = true;
-                        this.IMUJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.IMUJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("COMM");
     }
 
     public string GetIMUJsonString()
     {
-        IMUUpdated = false;
-        return this.IMUJsonString;
+        return this.GetJsonString("IMU");
     }
 
-    public bool isIMUUpdated()
+    public string GetERRORJsonString()
     {
-        return IMUUpdated;
-    }
-
-    ///////////////////////////////////////////// ROCKDATA
-
-    IEnumerator GetROCKDATAState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/rockdata"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.ROCKDATAJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.ROCKDATAUpdated = true;
-                        this.ROCKDATAJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.ROCKDATAJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("ERROR"); 
     }
 
     public string GetROCKDATAJsonString()
     {
-        ROCKDATAUpdated = false;
-        return this.ROCKDATAJsonString;
-    }
-
-    public bool isROCKDATAUpdated()
-    {
-        return ROCKDATAUpdated;
-    }
-
-    ///////////////////////////////////////////// EVAINFO
-
-    IEnumerator GetEVAINFOState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/eva_info"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.EVAINFOJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.EVAINFOUpdated = true;
-                        this.EVAINFOJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.EVAINFOJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("ROCKDATA");
     }
 
     public string GetEVAINFOJsonString()
     {
-        EVAINFOUpdated = false;
-        return this.EVAINFOJsonString;
-    }
-
-    public bool isEVAINFOUpdated()
-    {
-        return EVAINFOUpdated;
-    }
-
-    ///////////////////////////////////////////// TSSINFO
-
-    IEnumerator GetTSSINFOState()
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(this.url + "/tss/info"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.Success:
-                    if (this.TSSINFOJsonString != webRequest.downloadHandler.text)
-                    {
-                        this.TSSINFOUpdated = true;
-                        this.TSSINFOJsonString = webRequest.downloadHandler.text;
-                        Debug.Log(this.TSSINFOJsonString);
-                    }
-                    break;
-            }
-
-        }
+        return this.GetJsonString("EVAINFO");
     }
 
     public string GetTSSINFOJsonString()
     {
-        TSSINFOUpdated = false;
-        return this.TSSINFOJsonString;
+        return this.GetJsonString("TSSINFO");
+    }
+
+    public string GetTODOITEMSJsonString()
+    {
+        return this.GetJsonString("TODO"); 
+    }
+
+    public string GetWARNINGJsonString()
+    {
+        return this.GetJsonString("WARNING"); 
+    }
+
+
+
+    public bool isDCUUpdated()
+    {
+        return this.IsStateUpdated("DCU");
+    }
+
+    public bool isUIAUpdated()
+    {
+        return this.IsStateUpdated("UIA");
+    }
+
+    public bool isROVERUpdated()
+    {
+        return this.IsStateUpdated("ROVER");
+    }
+
+    public bool isSPECUpdated()
+    {
+        return this.IsStateUpdated("SPEC");
+    }
+
+    public bool isTELEMETRYUpdated()
+    {
+        return this.IsStateUpdated("TELEMETRY");
+    }
+
+    public bool isCOMMUpdated()
+    {
+        return this.IsStateUpdated("COMM");
+    }
+
+    public bool isIMUUpdated()
+    {
+        return this.IsStateUpdated("IMU");
+    }
+
+    public bool isERRORUpdated()
+    {
+        return this.IsStateUpdated("ERROR");
+    }
+
+    public bool isROCKDATAUpdated()
+    {
+        return this.IsStateUpdated("ROCKDATA");
+    }
+
+    public bool isEVAINFOUpdated()
+    {
+        return this.IsStateUpdated("EVAINFO");
     }
 
     public bool isTSSINFOUpdated()
     {
-        return TSSINFOUpdated;
+        return this.IsStateUpdated("TSSINFO");
     }
+
+    public bool isTODOITEMSUpdated()
+    {
+        return this.IsStateUpdated("TODO");
+    }
+
+    public bool isWARNINGUpdated()
+    {
+        return this.IsStateUpdated("WARNING");
+    }
+
 }

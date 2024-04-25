@@ -1458,7 +1458,7 @@ MonoBehaviour:
   - {fileID: -7073199959144918862}
   - {fileID: -6548794754907467038}
   m_renderMode: 1
-  m_depthSubmissionMode: 0
+  m_depthSubmissionMode: 1
   m_symmetricProjection: 0
 --- !u!114 &7144970541573624239
 MonoBehaviour:
