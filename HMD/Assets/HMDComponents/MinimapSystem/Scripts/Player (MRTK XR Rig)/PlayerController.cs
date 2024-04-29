@@ -43,14 +43,14 @@ public class PlayerController : MonoBehaviour
 
     public void AddPinToLMCC()
     {
-        LMCCPinsController lmccPinsController = FindObjectOfType<LMCCPinsController>();
+        /*LMCCPinsController lmccPinsController = FindObjectOfType<LMCCPinsController>();
 
         double[] latLongCoords = FindObjectOfType<LMCCPinsController>().ConvertMeterToLatLong(transform.position);
 
         string pinAsJson = "{ \"map\": \"add\", \"pins\": [\"" + latLongCoords[0] + "x" + latLongCoords[1] + "\"], \"dimensions\":[1] }";
 
-        StartCoroutine(lmccPinsController.AddPinFromHMD(pinAsJson));
+        //StartCoroutine(lmccPinsController.AddPinFromHMD(pinAsJson));
 
-        // eg. { "map": "add", "pins": ["49.494885734x99.475359834"], "dimensions":1 }
+        // eg. { "map": "add", "pins": ["49.494885734x99.475359834"], "dimensions":1 }*/
     }
 }
