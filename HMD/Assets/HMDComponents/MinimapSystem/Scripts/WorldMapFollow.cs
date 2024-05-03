@@ -7,9 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit.UI;
 public class WorldMapFollow : MonoBehaviour
 {
     LazyFollow lazyFollow;
-
-    [SerializeField] GameObject canvas;
-
     bool isInCourotine;
 
     // Start is called before the first frame update
@@ -17,7 +14,7 @@ public class WorldMapFollow : MonoBehaviour
     {
         lazyFollow = GetComponent<LazyFollow>();
         isInCourotine = false;
-        canvas.SetActive(false);
+        if (!isInCourotine) StartCoroutine(RotateToPlayerThenFixPos());
     }
 
     // Update is called once per frame
@@ -28,7 +25,6 @@ public class WorldMapFollow : MonoBehaviour
 
     void OnEnable() 
     {
-        canvas.SetActive(false);
         lazyFollow = GetComponent<LazyFollow>();
         isInCourotine = false;
         if (!isInCourotine) StartCoroutine(RotateToPlayerThenFixPos());
@@ -41,7 +37,6 @@ public class WorldMapFollow : MonoBehaviour
         yield return new WaitForFixedUpdate();
         lazyFollow.positionFollowMode = LazyFollow.PositionFollowMode.None;
         transform.position = new Vector3(transform.position.x, Camera.main.transform.position.y, transform.position.z);
-        canvas.SetActive(true);
         isInCourotine = false;
     }
 }

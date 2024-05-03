@@ -15,7 +15,7 @@ public class WorldMapCameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sizeSlider.Value = 20;
+        sizeSlider.Value = sizeSlider.MinValue;
         mapCamera = GetComponent<Camera>();
     }
 
