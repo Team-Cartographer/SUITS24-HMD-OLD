@@ -10,7 +10,7 @@ public class GatewayConnection : MonoBehaviour
     private string url;
     private bool connected;
     private float timeSinceLastUpdate = 0f;
-    private float updateInterval = 1.5f; // 1 second
+    private float updateInterval = 1.5f; // 1.5 seconds
 
     private Dictionary<string, bool> isUpdated = new Dictionary<string, bool>
     {
