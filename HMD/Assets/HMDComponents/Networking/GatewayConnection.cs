@@ -17,7 +17,7 @@ public class GatewayConnection : MonoBehaviour
         { "UIA", false }, { "DCU", false }, { "ROVER", false }, { "SPEC", false },
         { "TELEMETRY", false }, { "COMM", false }, { "IMU", false }, { "ERROR", false },
         { "ROCKDATA", false }, { "EVAINFO", false }, { "TSSINFO", false },
-        { "TODO", false }, { "WARNING", false }
+        { "TODO", false }, { "WARNING", false }, { "GEOJSON", false }
     };
 
     private Dictionary<string, string> jsonStrings = new Dictionary<string, string>
@@ -25,7 +25,7 @@ public class GatewayConnection : MonoBehaviour
         { "UIA", "" }, { "DCU", "" }, { "ROVER", "" }, { "SPEC", "" },
         { "TELEMETRY", "" }, { "COMM", "" }, { "IMU", "" }, { "ERROR", "" },
         { "ROCKDATA", "" }, { "EVAINFO", "" }, { "TSSINFO", "" },
-        { "TODO", "" }, { "WARNING", "" }
+        { "TODO", "" }, { "WARNING", "" }, { "GEOJSON", "" }
     };
 
     public void ConnectToHost(string host, int port)
@@ -70,6 +70,7 @@ public class GatewayConnection : MonoBehaviour
         StartCoroutine(GetTSSINFOState());
         StartCoroutine(GetTODOState());
         StartCoroutine(GetWARNINGState());
+        StartCoroutine(GetGEOJSONState());
     }
 
     private IEnumerator GetRequest(string uri)
@@ -111,6 +112,7 @@ public class GatewayConnection : MonoBehaviour
     private IEnumerator GetTSSINFOState() { yield return GetState("TSSINFO", "/tss/info"); }
     private IEnumerator GetTODOState() { yield return GetState("TODO", "/todo"); }
     private IEnumerator GetWARNINGState() { yield return GetState("WARNING", "/warning"); }
+    private IEnumerator GetGEOJSONState() { yield return GetState("GEOJSON", "/geojson"); }
     #endregion
 
     private IEnumerator GetState(string stateName, string endpoint)
@@ -211,6 +213,11 @@ public class GatewayConnection : MonoBehaviour
         return this.GetJsonString("WARNING"); 
     }
 
+    public string GetGEOJSONJsonString()
+    {
+        return this.GetJsonString("GEOJSON");
+    }
+
 
 
     public bool isDCUUpdated()
@@ -276,6 +283,11 @@ public class GatewayConnection : MonoBehaviour
     public bool isWARNINGUpdated()
     {
         return this.IsStateUpdated("WARNING");
+    }
+
+    public bool isGEOJSONUpdated()
+    {
+        return this.IsStateUpdated("GEOJSON");
     }
 
 }
